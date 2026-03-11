@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jelly Entertainment | We Ignite Experiences</title>
+    <style>
+        /* Variables & Base Setup */
+        :root {
+            --black: #050505;
+            --white: #ffffff;
+            --orange: #ff4500;
+            --gradient-main: linear-gradient(135deg, #000000 0%, #ff4500 50%, #ffffff 100%);
+        }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0;
+    background-color: var(--black); /* Restored to clean black */
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+        h1, h2, h3, h4 { margin-top: 0; }
+        a { text-decoration: none; color: var(--white); }
+
+        .gradient-text {
+            background: linear-gradient(to right, var(--white), var(--orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Navigation */
+        header {
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 15px 50px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .logo-container img { height: 40px; }
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a:hover { color: var(--orange); transition: 0.3s; }
+
+        /* Hero Section with Cinematic Video Background */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-video-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; /* This forces the video to fill all the empty black space */
+    z-index: -2; opacity: 0.6;
+}
+        }
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(255,69,0,0.1) 100%);
+            z-index: -1;
+        }
+        .hero h1 { font-size: 4.5em; max-width: 900px; line-height: 1.1; margin-bottom: 20px; z-index: 1; text-transform: uppercase;}
+        .hero p { font-size: 1.4em; max-width: 800px; z-index: 1; }
+        /* Hero Call-To-Action Buttons */
+        .hero-btn-container {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            z-index: 1; /* Keeps buttons clickable above the video */
+        }
+        .hero-btn {
+            padding: 12px 35px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+         .hero-btn-primary {
+            background: var(--orange); /* Changed from gradient to solid brand orange */
+            color: var(--white); /* Changed text to white for perfect readability */
+            border: none;
+        }
+        .hero-btn-primary:hover {
+            background: var(--white); /* Flips to white on hover for a dynamic effect */
+            color: var(--orange); /* Text turns orange on hover */
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.8);
+            transform: translateY(-3px);
+        }
+        .hero-btn-secondary {
+            background: rgba(0,0,0,0.4);
+            color: var(--white);
+            border: 2px solid var(--orange);
+            backdrop-filter: blur(5px);
+        }
+        .hero-btn-secondary:hover {
+            background: var(--red);
+            color: var(--white);
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* General Section Layout */
+        section { padding: 100px 20px; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-size: 3em; text-align: center; margin-bottom: 60px; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Services & Process */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .card {
+    background: rgba(255,255,255,0.03); 
+    padding: 30px; 
+    border-radius: 15px;
+    border: 1px solid rgba(255, 69, 0, 0.2); 
+    transition: 0.4s;
+    
+    /* NEW: Frosted Glass Effect */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(255, 69, 0, 0.2); border-color: var(--orange); }
+        .card h3 { color: var(--orange); }
+/* Premium Background specifically for Highlighted Projects */
+#projects {
+    background-image: 
+        url('Padding Black.png'), 
+        radial-gradient(circle at 15% 50%, rgba(255, 69, 0, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 85% 20%, rgba(255, 69, 0, 0.03) 0%, transparent 50%);
+    
+    background-size: cover, auto, auto; 
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* This keeps the image locked in place, revealing it dynamically as the user scrolls into the section */
+    background-attachment: fixed; 
+    
+    /* Adds a subtle top and bottom border to frame the premium section */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}        
+
+        /* Z-Pattern Project Layout */
+        .z-row {
+            display: flex; flex-wrap: wrap; align-items: flex-start; gap: 50px; margin-bottom: 100px;
+        }
+        .z-row:nth-child(even) { flex-direction: row-reverse; }
+        .z-content { flex: 1; min-width: 300px; }
+        .z-visual { flex: 1; min-width: 300px; position: relative; }
+
+        /* Interactive Image Slider (3D vs Realization) */
+        .comparison-slider {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* Aspect ratio */
+            overflow: hidden;
+            border-radius: 15px;
+            border: 2px solid var(--orange);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        .comparison-slider img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+        }
+        /* The 3D render will be clipped to show the realization underneath */
+        .img-3d { clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); z-index: 2; pointer-events: none; }
+        .img-real { z-index: 1; pointer-events: none; }
+        
+        .slider-range {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: transparent; z-index: 3; appearance: none; outline: none; margin: 0; cursor: ew-resize;
+        }
+        .slider-range::-webkit-slider-thumb {
+            appearance: none; width: 4px; height: 100vh; background: var(--white);
+            box-shadow: 0 0 10px var(--orange); cursor: ew-resize;
+        }
+        .slider-label { position: absolute; bottom: 10px; z-index: 4; font-weight: bold; padding: 5px 10px; background: rgba(0,0,0,0.6); border-radius: 5px; font-size: 0.8em; }
+        .label-3d { left: 10px; color: var(--orange); }
+        .label-real { right: 10px; color: var(--white); }
+
+        /* Video Containers */
+        .video-container {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); margin-top: 20px; background: #000;
+        }
+        .video-container iframe, .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; outline: none; }
+
+        /* "See More" Mini Cards Grid */
+        .mini-projects-grid {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 30px; 
+}
+
+.mini-card {
+    position: relative; 
+    height: 320px; /* Increased height for a cinematic, poster-like proportion */
+    border-radius: 15px; 
+    overflow: hidden;
+    background-size: cover; 
+    background-position: center; 
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle premium border */
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+/* New Hover Effect: The entire card pops up and glows orange */
+.mini-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(255, 69, 0, 0.3);
+    border-color: var(--orange);
+}
+
+.mini-card-overlay {
+    position: absolute; 
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Replaced flat black with a bottom-heavy gradient for better text readability */
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 100%); 
+    display: flex; flex-direction: column;
+    justify-content: flex-end; /* Pushes text to the bottom */
+    align-items: center; text-align: center; 
+    padding: 30px 20px;
+    box-sizing: border-box; transition: 0.4s;
+}
+
+/* Hover Effect: The dark overlay transitions into an elegant orange gradient */
+.mini-card:hover .mini-card-overlay { 
+    background: linear-gradient(to top, rgba(255,69,0,0.95) 0%, rgba(0,0,0,0.4) 100%); 
+}
+
+/* Card Typography Styling */
+.mini-card-overlay h3 {
+    color: var(--orange); /* Titles start out orange */
+    margin-bottom: 10px;
+    transition: 0.4s;
+}
+
+.mini-card:hover .mini-card-overlay h3 {
+    color: var(--white); /* Titles turn white on hover for perfect contrast */
+}
+
+/* Premium Button Styling */
+.see-more-btn {
+    margin-top: 15px; 
+    padding: 8px 25px; 
+    border: 1px solid var(--white); 
+    border-radius: 20px;
+    opacity: 0; 
+    transform: translateY(20px); 
+    transition: 0.4s;
+    font-weight: bold;
+}
+
+.mini-card:hover .see-more-btn { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+.see-more-btn:hover { 
+    background: var(--white); 
+    color: var(--orange); 
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); 
+}
+        /* Testimonials */
+        .testimonial-card h4 { color: var(--orange); text-align: right; }
+
+         /* Footer */
+footer {
+    background: var(--gradient-main); /* Restored your original brand gradient */
+    color: var(--black); /* Forces the default text to be black */
+    text-align: center;
+    padding: 100px 20px; 
+    margin-top: 80px;
+    
+    /* The "Full-Bleed" Trick (Keeps it stretched perfectly across the screen) */
+    width: 100vw; 
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+}
+
+footer h2 { 
+    font-size: 4.5em; 
+    margin-bottom:10px; 
+    text-transform: uppercase;
+    color: var(--black); /* Ensures the giant heading is black */
+}
+
+footer p { 
+    font-size: 1.3em; 
+    color: var(--black); /* Changed from light grey to black */
+    font-weight: 500; /* Made it slightly bolder for readability */
+}
+
+.contact-info {
+    font-size: 1.5em; 
+    margin-top: 40px;
+    color: var(--black);
+}
+        /* Animations */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+   /* =========================================
+   MOBILE RESPONSIVENESS (Phones & Tablets)
+   ========================================= */
+@media (max-width: 768px) {
+    
+    /* 1. Fix the 'Explore Projects' and 'Let's Talk' CTA Buttons */
+    .hero-btn-container {
+        flex-direction: column; /* Stacks the buttons vertically on top of each other */
+        width: 100%; 
+        padding: 0 20px; 
+        box-sizing: border-box;
+    }
+    .hero-btn {
+        width: 100%; /* Makes the buttons stretch edge-to-edge for easy thumb tapping */
+        font-size: 1em; /* Shrinks the button text slightly */
+        padding: 15px 0; 
+    }
+
+    /* 2. Fix the giant 'Let's Talk' Footer Header */
+    footer h2 { 
+        font-size: 2.8em !important; /* Shrinks the massive 4.5em text so it doesn't break the screen */
+    }
+
+    /* 3. Fix the 'Explore More Projects' Section Title */
+    #other-projects h2, #other-projects h3 { 
+        font-size: 2em !important; /* Overrides any inline styles to ensure it fits the phone screen */
+    }
+    
+}
+@media (max-width: 768px) {
+    /* 1. Neatly stack the Logo and Menu on top of each other */
+    header { flex-direction: column; padding: 15px; gap: 15px; }
+    nav ul { flex-wrap: wrap; justify-content: center; }
+    nav ul li { margin: 5px 10px; font-size: 0.9em; }
+
+    /* 2. Shrink the massive Hero text so it fits a phone screen */
+    .hero h1 { font-size: 2.5em; }
+    .hero p { font-size: 1.1em; padding: 0 10px; }
+
+    /* 3. Shrink Section Titles and adjust spacing */
+    section { padding: 60px 15px; }
+    .section-title { font-size: 2em; margin-bottom: 30px; }
+
+    /* 4. Fix the Z-Pattern to stack with nice spacing */
+    .z-row { gap: 30px; margin-bottom: 60px; }
+    .z-content h3 { font-size: 1.8em !important; }
+
+    /* 5. Shrink the massive Footer text */
+    footer { padding: 60px 20px; }
+    footer h2 { font-size: 2.8em; }
+    footer p { font-size: 1.1em; }
+    .contact-info { font-size: 1.2em; flex-direction: column; gap: 10px; }
+}        
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Jelly Entertainment Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Cinematic Hero Section -->
+    <section class="hero" id="about">
+        <!-- HERO VIDEO BACKGROUND -->
+        <video class="hero-video-bg" autoplay loop muted playsinline>
+            <source src="Pokemon Go Max Finale - Recap Video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        
+        <h1 class="fade-in">Jelly don’t follow recipes. <br><span class="gradient-text">We ignite experiences.</span></h1>
+        <p class="fade-in">We believe every event is a blank canvas. Through collaboration, we turn your vision into an experience by <strong style="color:var(--orange);">valuing the ideas, refining them, and amplifying their impact.</strong></p>
+        <!-- CTA Buttons -->
+        <div class="hero-btn-container fade-in">
+            <!-- Smooth scrolls directly to Highlighted Projects -->
+            <a href="#projects" class="hero-btn hero-btn-primary">Explore Projects</a>
+            
+            <!-- Opens WhatsApp directly in a new tab -->
+            <a href="https://wa.me/6281389334260" target="_blank" class="hero-btn hero-btn-secondary">Let's Talk</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2 class="section-title fade-in gradient-text">Our Services</h2>
+        <div class="grid-3">
+            <div class="card fade-in">
+                <h3>Event Production</h3>
+                <ul>
+                    <li>Event Organizer</li>
+                    <li>Technical Production (AV, lighting, LED and staging)</li>
+                    <li>Logistics and Vendor management</li>
+                    <li>Booth Production</li>
+                </ul>
+            </div>
+            <div class="card fade-in">
+                <h3>Event Types</h3>
+                <ul>
+                    <li>Conference & Product Launch</li>
+                    <li>Corporate Gathering</li>
+                    <li>Festival and Exhibition</li>
+                    <li>E-sport Event Organizer</li>
+                </ul>
+            </div>
+            <div class="card fade-in">
+                <h3>Our Differentiation [2]</h3>
+                <ul>
+                    <li>Proprietary 3D Design Tools for Pre-Event Visualization</li>
+                    <li>24/7 On-Site Crisis Management</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Highlighted Projects (Z-Pattern Layout) -->
+    <section id="projects">
+        <h2 class="section-title fade-in gradient-text">Highlighted Projects</h2>
+        
+        <!-- ROW 1: Pokémon GO Tour -->
+        <div class="z-row fade-in">
+            <div class="z-content">
+                <h3 style="font-size: 2.5em; color: var(--orange);">Pokémon GO Tour 2025</h3>
+                <p>Our biggest collaboration with Pokémon GO. We aim to enhance the experience of exploring places, battling in player-versus-player mode, and increasing engagement—especially with the Unova region joining the game [4].</p>
+                <ul>
+                    <li><strong>LED Battle Arena:</strong> Enjoy thrilling live PvP showdowns with a real-time leaderboard and audience voting</li>
+                    <li><strong>PokéStop Tower:</strong> Real-world replica with Electricity Station for players to stay</li>
+                    <li><strong>Double-Layer Photo Booth:</strong> AR-enabled Pikachu interactions and branded backdrop</li>
+                </ul>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-top: 20px; display: flex; justify-content: space-between; text-align: center;">
+                    <div><h2 style="margin:0; color:var(--orange);">2,000</h2><span>Attendees</span></div>
+                    <div><h2 style="margin:0; color:var(--orange);">800</h2><span>New Players</span></div>
+                    <div><h2 style="margin:0; color:var(--orange);">93%</h2><span>Satisfaction</span></div>
+                </div>
+            </div>
+            
+            <div class="z-visual">
+                <!-- INTERACTIVE 3D VS REALIZATION SLIDER -->
+                <p style="margin-bottom: 5px; color: #aaa; text-align: center; font-size: 0.9em;">Slide to compare 3D Design vs Reality</p>
+                <div class="comparison-slider">
+                    <!-- Realization Image (Background) -->
+                    <img class="img-real" src="Gancit Drone.jpg" alt="Realization">
+                    <!-- 3D Image (Foreground/Clipped) -->
+                    <img class="img-3d" src="Pespective Kanan Atas.png" alt="3D Render">
+                    <!-- Slider Input -->
+                    <input type="range" min="0" max="100" value="50" class="slider-range">
+                    <span class="slider-label label-3d">3D Render</span>
+                    <span class="slider-label label-real">Reality</span>
+                </div>
+                
+                <!-- Event Wrapped Video (YouTube) -->
+<div class="video-container">
+<iframe src="https://www.youtube.com/embed/old5iBH90XM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+        </div> <!-- This closes z-visual -->
+
+        <!-- ROW 2: Arthindo Group -->
+<div class="z-row fade-in">
+    
+    <!-- LEFT SIDE: Expanded Text & Testimonial -->
+    <div class="z-content">
+        <h3 style="font-size: 2.5em; color: var(--orange);">Malam Kebersamaan Arthindo Group 2026</h3>
+        
+        <p>We were commissioned to orchestrate this strategic corporate gathering, designed to help the company announce its early-year milestones and introduce new business partners. <strong>Our goal was to facilitate a seamless communication channel between leadership, stakeholders, and the internal team</strong> [1].</p>
+        
+        <p>To effectively appreciate stakeholders and the internal team, we merged the concepts of a corporate town hall and an entertainment showcase. This event delivered two key values: disseminating important, confidential internal updates while providing engaging entertainment for all employees [2].</p>
+        
+        <p>After presenting several concepts to leadership, <strong>'Malam Kebersamaan Arthindo' was selected as the winning theme</strong> [2].</p>
+
+        <!-- UI Enhancement: Highlighted Testimonial to elegantly fill the remaining vertical space -->
+        <div style="background: rgba(255, 69, 0, 0.05); border-left: 4px solid var(--orange); padding: 20px; margin-top: 30px; border-radius: 0 10px 10px 0;">
+            <p style="font-style: italic; color: #ccc; margin-top: 0;">"Jelly Entertainment terbukti menjadi mitra yang sangat handal. Meski dengan berbagai tantangan dan permintaan khusus di lapangan, tim tetap tenang dan solutif memberikan layanan terbaik. Hasil acara perusahaan kami sukses besar berkat dukungan penuh dari tim Jelly." [3]</p>
+            <h4 style="color: var(--orange); margin-bottom: 0;">- Luthfi Pratama</h4>
+            <span style="font-size: 0.8em; color: #888;">Head Event 'Malam Kebersamaan' at Arthindo [3]</span>
+        </div>
+    </div>
+            <div class="z-visual">
+                <!-- FIRST INTERACTIVE SLIDER (Main Stage) -->
+                <p style="margin-bottom: 5px; color: #aaa; text-align: center; font-size: 0.9em;">Slide to compare Photobooth</p>
+                <div class="comparison-slider" style="margin-bottom: 30px;">
+                    <!-- Realization Image (Background) -->
+                    <img class="img-real" src="OTW WEBSETArtboard 4 copy.png" alt="Realization Stage">
+                    <!-- 3D Image (Foreground/Clipped) -->
+                    <img class="img-3d" src="OTW WEBSETArtboard 4.png" alt="3D Render Stage">
+                    <!-- Slider Input -->
+                    <input type="range" min="0" max="100" value="50" class="slider-range">
+                    <span class="slider-label label-3d">3D Render</span>
+                    <span class="slider-label label-real">Reality</span>
+                </div>
+
+                <!-- SECOND INTERACTIVE SLIDER (Photo Booth Backdrop) -->
+                <p style="margin-bottom: 5px; color: #aaa; text-align: center; font-size: 0.9em;">Slide to compare Main Stage</p>
+                <div class="comparison-slider" style="margin-bottom: 30px;">
+                    <!-- Realization Image (Background) -->
+                    <img class="img-real" src="OTW WEBSETArtboard 4 copy 3.jpg" alt="Realization Backdrop">
+                    <!-- 3D Image (Foreground/Clipped) -->
+                    <img class="img-3d" src="OTW WEBSETArtboard 4 copy 4.png" alt="3D Render Backdrop">
+                    <!-- Slider Input -->
+                    <input type="range" min="0" max="100" value="50" class="slider-range">
+                    <span class="slider-label label-3d">3D Render</span>
+                    <span class="slider-label label-real">Reality</span>
+                </div>
+
+                 <!-- Event Wrapped Video -->
+       <!-- Event Wrapped Video (YouTube) -->
+<div class="video-container">
+<iframe src="https://www.youtube.com/embed/3HvCUDMQJTo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+</div>
+        </div> <!-- This closes z-visual -->
+        </div> <!-- ADD THIS: Closes the z-row -->
+
+        <!-- Secondary Projects ("See More" Grid) -->
+        <section id="other-projects" style="padding-top: 0;">
+
+    <!-- Secondary Projects ("See More" Grid) -->
+    <section id="other-projects" style="padding-top: 0;">
+        <h2 class="section-title fade-in gradient-text">Explore More Projects</h2>
+        <div class="mini-projects-grid">
+            
+            <!-- AALF Card -->
+            <div class="mini-card fade-in" style="background-image: url('AALF.jpg');">
+                <div class="mini-card-overlay">
+                    <h3>AALF RUN 2023 & 2024</h3>
+                    <p style="font-size: 0.9em;">Fostered team spirit, wellness, and a sense of community among the firm’s employees [8].</p>
+                    <a href="aalf.html" class="see-more-btn">See more...</a>
+                </div>
+            </div>
+
+            <!-- Pokemon GO MAX Card -->
+            <div class="mini-card fade-in" style="background-image: url('AEON TB MAX FINALE.JPG');">
+                <div class="mini-card-overlay">
+                    <h3>Pokemon GO FEST MAX Finale (2025)</h3>
+                    <p style="font-size: 0.9em;">AEON Tanjung Barat Event.</p>
+                    <a href="pokemon-max.html" class="see-more-btn">See more...</a>
+                </div>
+            </div>
+
+            <!-- Mutual Major GOLF Event Card -->
+            <div class="mini-card fade-in" style="background-image: url('Mutual\ major\ Golf\ Drive\ Person.JPG');">
+                <div class="mini-card-overlay">
+                    <h3>Mutual Major GOLF Event</h3>
+                    <p style="font-size: 0.9em;">Full-service live production setup for Laurier’s TikTok campaigns.</p>
+                    <a href="mutual-major-golf.html" class="see-more-btn">See more...</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <h2 class="section-title fade-in gradient-text">Client's Testimonial</h2>
+        <div class="grid-3">
+            <div class="card testimonial-card fade-in">
+                <p><em>"Working with the Jelly team has been a pleasant and professional experience... every detail in production is well taken care of."</em></p>
+                <h4>- Nidya Arilya, Event Manager at Niantic</h4>
+            </div>
+            <div class="card testimonial-card fade-in">
+                <p><em>"Jelly Entertainment terbukti menjadi mitra yang sangat handal... Hasil acara perusahaan kami sukses besar berkat dukungan penuh dari tim Jelly."</em></p>
+                <h4>- Luthfi Pratama, Head Event at Arthindo</h4>
+            </div>
+            <div class="card testimonial-card fade-in">
+                <p><em>"Tim Jelly sangat memperhatikan hal hal detail dan tidak ada keterlambatan manpower maupun perlengkapan. Handling sangat ok..."</em></p>
+                <h4>- Indah Kusumawati, COO Ariyanto Arnaldo Law Firm</h4>
+            </div>
+            <div class="card testimonial-card fade-in">
+                <p><em>"Bahkan proses loading in dan loading out untuk set up booth minim pengawasan tetapi hasil tetap memuaskan. Great job!"</em></p>
+                <h4>- Dennis Kumara, GM Marketing IDS | BTEC</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+<footer id="contact">
+    <!-- Removed gradient-text class so it turns solid black -->
+    <h2>Let’s Talk</h2>
+    <p>Want to speak with us directly? We're just a message away!</p>
+    
+    <div class="contact-info">
+        <p>
+            <!-- Removed the orange inline styles so the names are black -->
+            <strong>Billy:</strong> +62 8138 5395 100
+            &nbsp;&nbsp;|&nbsp;&nbsp; 
+            <strong>Natan:</strong> +62 8138 9334 260
+        </p>
+        <p style="margin-top: 15px;">
+            <strong>Email:</strong> salesmarketing@jelly-eo.com
+        </p>
+    </div>
+    
+    <p style="margin-top: 60px; font-size: 0.9em; margin-bottom: 0;">© 2026 Jelly Entertainment. All Rights Reserved.</p>
+</footer>
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Intersection Observer for scroll fade-in animations
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Logic for Interactive 3D vs Realization Sliders
+        document.querySelectorAll('.slider-range').forEach(slider => {
+            slider.addEventListener('input', (e) => {
+                const sliderValue = e.target.value;
+                // Find the 3D image sibling inside the same container
+                const img3d = e.target.parentElement.querySelector('.img-3d');
+                // Adjust the clip-path polygon based on the slider percentage
+                img3d.style.clipPath = `polygon(0 0, ${sliderValue}% 0, ${sliderValue}% 100%, 0 100%)`;
+            });
+        });
+    </script>
+</body>
+</html>
