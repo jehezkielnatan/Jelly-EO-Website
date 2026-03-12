@@ -81,6 +81,29 @@ footer p {
         .fade-in.visible { opacity: 1; transform: translateY(0); }
         .back-btn { display: inline-block; margin-top: 40px; padding: 10px 25px; border: 1px solid var(--orange); color: var(--orange); border-radius: 30px; transition: 0.3s; }
         .back-btn:hover { background: var(--orange); color: var(--white); box-shadow: 0 0 15px rgba(255, 69, 0, 0.6); }
+/* Mobile Responsiveness for Header/Navigation */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px; /* Reduces the massive 50px side padding to fit the phone screen */
+        flex-direction: column; /* Stacks your logo on top of the menu links neatly */
+        gap: 15px; /* Adds breathing room between the logo and the menu */
+    }
+    
+    nav ul {
+        flex-wrap: wrap; /* Allows the links to wrap neatly if the screen is super narrow */
+        justify-content: center;
+    }
+    
+    nav ul li {
+        margin: 5px 10px; /* Reduces the 30px spacing between links to fit the screen */
+        font-size: 0.9em; /* Slightly scales down the text for a cleaner look */
+    }
+
+    .page-header {
+        padding-top: 180px; /* Pushes your title down slightly so the newly stacked menu doesn't cover it */
+    }
+}
+        
     </style>
 </head>
 <body>
@@ -160,4 +183,5 @@ footer p {
 </body>
 
 </html>
+
 
