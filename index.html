@@ -374,7 +374,17 @@ footer p {
     footer h2 { font-size: 2.8em; }
     footer p { font-size: 1.1em; }
     .contact-info { font-size: 1.2em; flex-direction: column; gap: 10px; }
-}        
+}  
+        /* Mobile Responsiveness for Project Cards */
+@media (max-width: 768px) {
+    .see-more-btn {
+        opacity: 1; /* Makes the button permanently visible */
+        transform: translateY(0); /* Puts the button in its proper place */
+    }
+    .mini-card-overlay {
+        background: rgba(0,0,0,0.7); /* Slightly darkens the card so the text is easy to read */
+    }
+}
     </style>
 </head>
 <body>
@@ -659,5 +669,6 @@ footer p {
     </script>
 </body>
 </html>
+
 
 
