@@ -431,13 +431,18 @@
             .clients h2 { font-size: 3rem; }
             .client-logos img { max-height: 45px; max-width: 110px; }
 
+            /* --- FIXED MOBILE FOOTER --- */
             footer {
                 flex-direction: column;
                 gap: 30px;
-                text-align: center;
+                align-items: center; /* Centers the logo and the contact block */
                 padding: 40px 20px;
             }
-            .contact-item { justify-content: center; }
+            
+            .footer-contact {
+                align-items: flex-start; /* Forces the icons and text to line up nicely on the left */
+                width: fit-content; /* Hugs the text tightly so the whole block can be centered */
+                margin: 0 auto; 
         }
         /* =========================================
            PHOTOBOOTH BODY SHOWCASE (NEW)
