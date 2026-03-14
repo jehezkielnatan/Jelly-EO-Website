@@ -484,12 +484,13 @@
             display: none; /* Hides scrollbar on Chrome/Safari */
         }
 
-        .booth-slide {
-            flex: 0 0 100%;
-            scroll-snap-align: center;
-            display: flex;
-            justify-content: center;
-            padding: 20px 0;
+       .booth-slide img {
+            height: 350px; /* Sets a consistent height */
+            width: 100%; /* THIS IS THE FIX: Forces the image to stay inside the box */
+            object-fit: contain; /* Shrinks the image neatly without cutting anything off */
+            /* Premium UI touch: Adds a soft, realistic drop shadow to the PNGs */
+            filter: drop-shadow(0px 25px 20px rgba(0, 0, 0, 0.15));
+            transition: transform 0.3s ease;
         }
 
         .booth-slide img {
