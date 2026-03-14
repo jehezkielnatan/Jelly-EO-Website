@@ -393,18 +393,13 @@
             object-fit: contain;
             border-radius: 5px;
         }
-
-        /* Mobile Responsiveness */
+/* --- Mobile Responsiveness --- */
         @media (max-width: 900px) {
-            
-
             .services-box { 
-                padding: 70px 25px 40px 25px; /* Extra padding top so images don't block title */
+                padding: 70px 25px 40px 25px; 
                 width: 95%; 
             }
-            
-            .service-columns { grid-template-columns: 1fr; } /* Stacks cards on mobile */
-
+            .service-columns { grid-template-columns: 1fr; }
             .testi-card { width: 45%; }
             .testi-grid { flex-wrap: wrap; }
         }
@@ -416,40 +411,41 @@
                 padding: 20px;
             }
             nav ul { gap: 20px; }
-
             .hero { padding: 80px 20px; min-height: 60vh; }
             .hero h1 { font-size: 3.5rem; }
-
             .services-section { padding: 40px 10px; }
-
             .testimonials { padding: 40px 20px; }
             .testimonials h2 { font-size: 3rem; }
             .testi-grid { flex-direction: column; align-items: center; }
             .testi-card { width: 100%; max-width: 400px; }
-
             .clients { padding: 40px 20px; }
             .clients h2 { font-size: 3rem; }
             .client-logos img { max-height: 45px; max-width: 110px; }
 
-            /* --- FIXED MOBILE FOOTER --- */
             footer {
                 flex-direction: column;
                 gap: 30px;
-                align-items: center; /* Centers the logo and the contact block */
+                align-items: center;
                 padding: 40px 20px;
             }
-            
             .footer-contact {
-                align-items: flex-start; /* Forces the icons and text to line up nicely on the left */
-                width: fit-content; /* Hugs the text tightly so the whole block can be centered */
+                align-items: flex-start;
+                width: fit-content;
                 margin: 0 auto; 
-        }
-       /* =========================================
-           FINAL DESKTOP SPECIFICITY LOCK -PHOTOBOOTH BODY
+            }
+        } /* <--- THIS WAS THE MISSING BRACKET FIXING THE WHOLE SITE! */
+
+        /* =========================================
+           PHOTOBOOTH BODY - GLOBAL DESKTOP LOCK
            ========================================= */
         
-        /* This forces the container to stay small on desktop */
-        body .booth-track {
+        /* This now runs on Desktop because it is OUTSIDE the media query */
+        .photobooth-showcase {
+            padding: 60px 20px;
+            background-color: #fafafa;
+        }
+
+        .booth-track {
             display: flex !important;
             width: 400px !important; 
             height: 500px !important;
@@ -458,8 +454,7 @@
             position: relative;
         }
 
-        /* This forces the image to stay small on desktop */
-        body .booth-slide img {
+        .booth-slide img {
             display: block !important;
             margin: 0 auto !important;
             height: 400px !important; 
@@ -469,7 +464,7 @@
             filter: drop-shadow(0px 25px 20px rgba(0,0,0,0.15));
         }
 
-        body .booth-slide {
+        .booth-slide {
             flex: 0 0 100% !important;
             width: 100% !important;
             height: 100% !important;
@@ -478,16 +473,17 @@
             align-items: center !important;
         }
 
-        /* Mobile specific sizing */
+        /* Small overrides for mobile booth specifically */
         @media (max-width: 768px) {
-            body .booth-track {
+            .booth-track {
                 width: 280px !important;
                 height: 400px !important;
             }
-            body .booth-slide img {
+            .booth-slide img {
                 height: 320px !important;
                 max-width: 240px !important;
             }
+            .slider-btn { display: none; }
         }
     </style>
 </head>
