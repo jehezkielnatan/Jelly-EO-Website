@@ -37,7 +37,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Navigation - Upgraded with dynamic scroll state */
+        /* Navigation - Desktop */
         header {
             background: rgba(5, 5, 5, 0.4);
             backdrop-filter: blur(10px);
@@ -55,15 +55,34 @@
         }
         header.scrolled {
             padding: 15px 50px;
-            background: rgba(5, 5, 5, 0.9);
+            background: rgba(5, 5, 5, 0.95);
             box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
-        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .logo-container { display: flex; align-items: center; gap: 15px; z-index: 1001; }
         .logo-container img { height: 40px; transition: height 0.3s; }
-        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+        
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; transition: 0.3s ease; }
         nav ul li { margin-left: 35px; }
         nav ul li a { font-weight: 500; font-size: 0.95em; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
         nav ul li a:hover { color: var(--orange); }
+
+        /* Mobile Menu Toggle (Hidden on Desktop) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .menu-toggle span {
+            width: 30px;
+            height: 2px;
+            background: var(--white);
+            transition: 0.3s;
+        }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
         /* Hero Section */
         .hero {
@@ -75,17 +94,21 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
         .hero-video-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
-            z-index: -2; opacity: 0.5; /* Slightly darker to make text pop more */
+            z-index: -2; 
+            opacity: 0.9; /* Brightened video */
         }
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(5,5,5,1) 100%);
+            /* Radial gradient spotlight for perfect text readability without hiding the video */
+            background: radial-gradient(circle at center, rgba(5,5,5,0.6) 0%, rgba(5,5,5,0.2) 60%, rgba(5,5,5,0.95) 100%);
             z-index: -1;
         }
         .hero h1 { font-size: 4em; max-width: 1000px; line-height: 1.1; margin-bottom: 20px; z-index: 1; text-transform: uppercase; letter-spacing: 2px;}
@@ -111,16 +134,11 @@
         }
 
         /* General Section Layout */
-        section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; } /* Tightened max-width for better reading measure */
+        section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; box-sizing: border-box; }
         .section-title { font-size: 2.8em; text-align: center; margin-bottom: 80px; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* UPGRADE: Sticky Stacking Cards for Services */
-        .services-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 20px; /* Reduced gap since they stack */
-            padding-bottom: 50px;
-        }
+        /* Sticky Stacking Cards for Services */
+        .services-stack { display: flex; flex-direction: column; gap: 20px; padding-bottom: 50px; }
         .sticky-card {
             position: sticky;
             background: rgba(15, 15, 15, 0.8);
@@ -133,42 +151,29 @@
             box-shadow: 0 -15px 30px rgba(0,0,0,0.5);
             transition: 0.4s;
         }
-        /* The magic offset that creates the stacking effect */
         .sticky-card:nth-child(1) { top: 120px; z-index: 10; }
         .sticky-card:nth-child(2) { top: 140px; z-index: 20; }
         .sticky-card:nth-child(3) { top: 160px; z-index: 30; }
-        
         .sticky-card h3 { color: var(--orange); font-size: 2em; margin-bottom: 20px;}
         .sticky-card ul { list-style: none; padding: 0; font-size: 1.1em; line-height: 2; color: #ccc;}
         .sticky-card ul li::before { content: "• "; color: var(--orange); font-weight: bold; }
 
-        /* Premium Background specifically for Highlighted Projects */
+        /* Highlighted Projects Background */
         #projects {
             background-image: 
                 radial-gradient(circle at 15% 50%, rgba(255, 69, 0, 0.03) 0%, transparent 50%),
                 radial-gradient(circle at 85% 20%, rgba(255, 69, 0, 0.02) 0%, transparent 50%);
             background-attachment: fixed; 
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            max-width: 100%; /* Allows background to bleed edge to edge */
+            max-width: 100%;
         }
         .projects-container { max-width: 1200px; margin: 0 auto; }
 
-        /* UPGRADE: Z-Pattern with Sticky Text Layout */
-        .z-row {
-            display: flex; flex-wrap: wrap; align-items: flex-start; gap: 60px; margin-bottom: 150px;
-        }
+        /* Z-Pattern with Sticky Text Layout */
+        .z-row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 60px; margin-bottom: 150px; }
         .z-row:nth-child(even) { flex-direction: row-reverse; }
-        
-        /* This makes the text stay pinned while the right side scrolls */
-        .z-content { 
-            flex: 1; min-width: 300px; 
-            position: sticky; top: 150px; 
-        }
-        .z-visual { 
-            flex: 1.2; min-width: 300px; 
-            display: flex; flex-direction: column; gap: 40px; /* Separates sliders and videos cleanly */
-        }
-
+        .z-content { flex: 1; min-width: 300px; position: sticky; top: 150px; }
+        .z-visual { flex: 1.2; min-width: 300px; display: flex; flex-direction: column; gap: 40px; width: 100%; }
         .z-content h3 { font-size: 2.8em; color: var(--orange); line-height: 1.1; margin-bottom: 20px;}
         .z-content p { font-size: 1.1em; color: #bbb; }
         .stats-box { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 15px; margin-top: 30px; display: flex; justify-content: space-between; text-align: center; border: 1px solid rgba(255,255,255,0.05);}
@@ -177,7 +182,7 @@
 
         /* Interactive Image Slider */
         .comparison-slider {
-            position: relative; width: 100%; padding-top: 65%; /* Taller aspect ratio for impact */
+            position: relative; width: 100%; padding-top: 65%;
             overflow: hidden; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
         .comparison-slider img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -188,7 +193,7 @@
             background: transparent; z-index: 3; appearance: none; outline: none; margin: 0; cursor: ew-resize;
         }
         .slider-range::-webkit-slider-thumb {
-            appearance: none; width: 3px; height: 100vh; background: var(--white);
+            appearance: none; width: 4px; height: 100vh; background: var(--white);
             box-shadow: 0 0 15px var(--orange); cursor: ew-resize;
         }
         .slider-label { position: absolute; bottom: 15px; z-index: 4; font-weight: 600; padding: 6px 15px; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); border-radius: 30px; font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px;}
@@ -224,18 +229,17 @@
         }
         .mini-card:hover .see-more-btn { opacity: 1; transform: translateY(0); }
 
-        /* Testimonials - Refined typography */
+        /* Testimonials */
         .testimonial-card {
             background: transparent; padding: 40px; border-left: 1px solid rgba(255,255,255,0.1); border-top: none; border-right: none; border-bottom: none; border-radius: 0;
         }
         .testimonial-card p { font-size: 1.1em; font-style: italic; color: #bbb; line-height: 1.8; margin-bottom: 20px;}
         .testimonial-card h4 { color: var(--orange); text-align: left; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px;}
-        
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
 
         /* Footer */
         footer {
-            background: var(--gradient-main); color: var(--black); text-align: center; padding: 120px 20px; margin-top: 80px; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; box-sizing: border-box;
+            background: var(--gradient-main); color: var(--black); text-align: center; padding: 120px 20px; margin-top: 80px; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; box-sizing: border-box; overflow: hidden;
         }
         footer h2 { font-size: 5em; margin-bottom:10px; text-transform: uppercase; color: var(--black); font-weight: 800; letter-spacing: -2px;}
         footer p { font-size: 1.2em; color: var(--black); font-weight: 500; }
@@ -245,19 +249,86 @@
         .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* Mobile Adjustments */
+
+        /* =========================================
+           MOBILE & TABLET RESPONSIVENESS OVERHAUL
+           ========================================= */
         @media (max-width: 900px) {
-            .z-content { position: relative; top: 0; margin-bottom: 30px; } /* Disable sticky on small screens */
-            .sticky-card { position: relative; top: 0 !important; } /* Disable stacking on mobile for better scroll */
+            /* 1. Mobile Menu Activation */
+            .menu-toggle { display: flex; }
             header { padding: 15px 20px; }
             header.scrolled { padding: 15px 20px; }
-            nav ul { display: none; } /* Consider adding a hamburger menu here later */
-            .hero h1 { font-size: 2.5em; }
-            .section-title { font-size: 2em; }
+            
+            nav {
+                position: absolute;
+                top: 100%; left: 0; width: 100%;
+                background: rgba(5, 5, 5, 0.98);
+                backdrop-filter: blur(15px);
+                border-bottom: 1px solid rgba(255,69,0,0.3);
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.4s ease;
+            }
+            nav.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+            nav ul {
+                flex-direction: column;
+                padding: 30px 20px;
+                align-items: center;
+                gap: 25px;
+            }
+            nav ul li { margin: 0; }
+
+            /* 2. Hero Section Mobile Fixes */
+            .hero h1 { font-size: 2.3em; letter-spacing: 1px; }
+            .hero p { font-size: 1.1em; }
+            .hero-btn-container { flex-direction: column; width: 100%; gap: 15px; }
+            .hero-btn { width: 100%; padding: 15px 0; }
+
+            /* 3. Section Padding & Typography Scaling */
+            section { padding: 70px 20px; }
+            .section-title { font-size: 2em; margin-bottom: 40px; }
+
+            /* 4. Disable Sticky Stacking on Touch Screens (Prevents jumpy scrolling) */
+            .sticky-card { 
+                position: relative; 
+                top: 0 !important; 
+                padding: 35px 25px; 
+            }
+
+            /* 5. Fix the Z-Pattern Layout for Mobile */
+            /* Forces text to ALWAYS be above the image on mobile */
+            .z-row, .z-row:nth-child(even) { 
+                flex-direction: column; 
+                gap: 30px; 
+                margin-bottom: 80px; 
+            }
+            .z-content { 
+                position: relative; /* Disable sticky text on mobile */
+                top: 0; 
+                min-width: 100%;
+            }
             .z-content h3 { font-size: 2em; }
-            footer h2 { font-size: 3em; }
-            .hero-btn-container { flex-direction: column; width: 100%; padding: 0 20px; box-sizing: border-box;}
-            .hero-btn { width: 100%; }
+            .stats-box { flex-direction: column; gap: 15px; }
+
+            /* 6. Mini Cards / Portfolio Grid */
+            .mini-card { height: 350px; }
+            .see-more-btn { opacity: 1; transform: translateY(0); } /* Always visible on mobile */
+            .mini-card-overlay p { opacity: 1; transform: translateY(0); }
+
+            /* 7. Footer Mobile Sizing */
+            footer { padding: 80px 20px; }
+            footer h2 { font-size: 3em; letter-spacing: -1px; }
+            .contact-info { 
+                display: flex; 
+                flex-direction: column; 
+                font-size: 1.1em; 
+                gap: 15px; 
+            }
         }
     </style>
 </head>
@@ -267,7 +338,14 @@
         <div class="logo-container">
             <img src="logo.png" alt="Jelly Entertainment Logo">
         </div>
-        <nav>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="nav-links">
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
@@ -454,7 +532,8 @@
         <div class="contact-info">
             <p>
                 <strong>Billy:</strong> +62 8138 5395 100
-                &nbsp;&nbsp;|&nbsp;&nbsp; 
+            </p>
+            <p>
                 <strong>Natan:</strong> +62 8138 9334 260
             </p>
             <p style="margin-top: 15px; font-size: 0.8em;">
@@ -474,6 +553,23 @@
             } else {
                 header.classList.remove('scrolled');
             }
+        });
+
+        // Mobile Menu Toggle Logic
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
         });
 
         // Smooth scrolling for navigation links
