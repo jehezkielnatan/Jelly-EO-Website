@@ -160,20 +160,29 @@
 
         /* Services Section */
         .services-section {
-            position: relative;
-            padding: 80px 0;
+            padding: 80px 20px;
             display: flex;
             justify-content: center;
             background-color: #ffffff;
+            overflow: hidden; /* Prevents horizontal scroll on smaller screens */
+        }
+
+        /* The new wrapper locks the size so it never stretches too wide */
+        .services-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 950px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .services-box {
             background-color: var(--primary-red);
             color: var(--light-text);
-            width: 70%;
-            padding: 50px;
+            width: 100%;
+            padding: 60px 80px; /* Adjusted padding to give text breathing room */
             border-radius: 10px;
-            text-align: center;
             position: relative;
             z-index: 2;
         }
@@ -181,43 +190,51 @@
         .services-box h2 {
             font-size: 4rem;
             margin-bottom: 40px;
+            text-align: center;
         }
 
         .services-grid {
             display: flex;
             flex-direction: column;
             gap: 40px;
-            text-align: left;
         }
 
         .service-row h3 {
             text-align: center;
             font-size: 1.3rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .service-columns {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             justify-content: space-between;
         }
 
         .service-item {
             flex: 1;
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
+            text-align: left;
         }
 
+        .service-item strong {
+            display: block; /* Puts the bold text on its own line like your design */
+            margin-bottom: 5px;
+        }
+
+        /* Lock the photobooths directly to the wrapper, not the screen */
         .booth-img {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            height: 80%;
+            height: 115%; /* Makes them pop slightly above and below the red box */
             z-index: 3;
         }
 
-        .booth-left { left: 5%; }
-        .booth-right { right: 5%; }
+        /* Use negative pixels to push them just outside the 950px box */
+        .booth-left { left: -100px; }
+        .booth-right { right: -100px; }
 
         /* Testimonials Section */
         .testimonials {
@@ -419,28 +436,32 @@
     </section>
 
     <section id="services" class="services-section">
-        <img src="3DAsset JellyPop Body13@3x.png" alt="Left Photobooth Render" class="booth-img booth-left">
-        <img src="3DAsset JellyPop Body14@3x.png" alt="Right Photobooth Render" class="booth-img booth-right">
-
-        <div class="services-box">
-            <h2 class="impact-title">OUR SERVICES</h2>
+        
+        <div class="services-wrapper">
             
-            <div class="services-grid">
-                <div class="service-row">
-                    <h3 class="roboto-bold">Seamless Photobooth Experience</h3>
-                    <div class="service-columns">
-                        <div class="service-item"><strong class="roboto-bold">1.</strong> All-in-One Setup: Solusi lengkap mulai dari kamera profesional, lighting hingga backdrop yang estetis</div>
-                        <div class="service-item"><strong class="roboto-bold">2.</strong> Autopilot System & Expert Crew: Didukung teknologi canggih dan kru yang ramah (helpful) untuk memastikan kelancaran sesi foto</div>
-                        <div class="service-item"><strong class="roboto-bold">3.</strong> Unlimited Sessions: Tamu bebas berekspresi dengan sesi foto tak terbatas dan durasi yang leluasa</div>
-                    </div>
-                </div>
+            <img src="3DAsset JellyPop Body13@3x.png" alt="Left Photobooth Render" class="booth-img booth-left">
+            <img src="3DAsset JellyPop Body14@3x.png" alt="Right Photobooth Render" class="booth-img booth-right">
 
-                <div class="service-row">
-                    <h3 class="roboto-bold">Personalized & Instant Keepsakes</h3>
-                    <div class="service-columns">
-                        <div class="service-item"><strong class="roboto-bold">1.</strong> Fully Customizable Design: Kebebasan kustomisasi frame sesuai identitas acara</div>
-                        <div class="service-item"><strong class="roboto-bold">2.</strong> Instant Hybrid Output: Dapatkan hasil cetak fisik secara instan serta akses digital (softcopy) cepat melalui QR Code.</div>
-                        <div class="service-item"><strong class="roboto-bold">3.</strong> Engaging Props & Accessories: Berbagai pilihan aksesori unik untuk menambah keseruan dan kreativitas setiap jepretan.</div>
+            <div class="services-box">
+                <h2 class="impact-title">OUR SERVICES</h2>
+                
+                <div class="services-grid">
+                    <div class="service-row">
+                        <h3 class="roboto-bold">Seamless Photobooth Experience</h3>
+                        <div class="service-columns">
+                            <div class="service-item"><strong class="roboto-bold">1. All-in-One Setup:</strong> Solusi lengkap mulai dari kamera profesional, lighting hingga backdrop yang estetis.</div>
+                            <div class="service-item"><strong class="roboto-bold">2. Autopilot System & Expert Crew:</strong> Didukung teknologi canggih dan kru yang ramah (helpful) untuk memastikan kelancaran sesi foto.</div>
+                            <div class="service-item"><strong class="roboto-bold">3. Unlimited Sessions:</strong> Tamu bebas berekspresi dengan sesi foto tak terbatas dan durasi yang leluasa.</div>
+                        </div>
+                    </div>
+
+                    <div class="service-row">
+                        <h3 class="roboto-bold">Personalized & Instant Keepsakes</h3>
+                        <div class="service-columns">
+                            <div class="service-item"><strong class="roboto-bold">1. Fully Customizable Design:</strong> Kebebasan kustomisasi frame sesuai identitas acara.</div>
+                            <div class="service-item"><strong class="roboto-bold">2. Instant Hybrid Output:</strong> Dapatkan hasil cetak fisik secara instan serta akses digital (softcopy) cepat melalui QR Code.</div>
+                            <div class="service-item"><strong class="roboto-bold">3. Engaging Props & Accessories:</strong> Berbagai pilihan aksesori unik untuk menambah keseruan dan kreativitas setiap jepretan.</div>
+                        </div>
                     </div>
                 </div>
             </div>
