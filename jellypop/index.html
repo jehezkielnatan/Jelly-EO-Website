@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jellypop | Your Friendly Photobooth</title>
+    <!-- Social Link Preview Tags -->
+    <meta property="og:title" content="Jellypop | Your Friendly Photobooth">
+    <meta property="og:description" content="Jellypop exists to help people become #MemoryMakers.">
+    <meta property="og:image" content="https://jelly-eo.com/logo.png">
+    <meta property="og:url" content="https://jelly-eo.com/jellypop/">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="../favicon.png">
+
+    <style>
+        /* Variables & Base Setup (Matching your main website) */
+        :root {
+            --black: #050505;
+            --white: #ffffff;
+            --orange: #ff4500;
+            --jellypop-red: #E63946; /* To match the photobooth color */
+            --gradient-main: linear-gradient(135deg, #000000 0%, #ff4500 50%, #ffffff 100%);
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: var(--black); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3, h4 { margin-top: 0; }
+        a { text-decoration: none; color: var(--white); }
+        .gradient-text { background: linear-gradient(to right, var(--white), var(--orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Navigation */
+        header { background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(10px); padding: 15px 50px; position: fixed; width: 100%; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .logo-container img { height: 40px; }
+        .jellypop-logo-text { font-size: 1.5em; font-weight: 900; letter-spacing: 2px; }
+        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a:hover { color: var(--orange); transition: 0.3s; }
+
+        /* General Section Layout */
+        section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 3em; text-align: center; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .section-subtitle { text-align: center; color: var(--orange); margin-bottom: 50px; font-size: 1.5em; }
+
+        /* Hero Section */
+        .hero { display: flex; align-items: center; justify-content: space-between; min-height: 100vh; padding-top: 150px; gap: 50px; }
+        .hero-content { flex: 1; }
+        .hero-content h1 { font-size: 4em; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; }
+        .hero-content p { font-size: 1.2em; color: #ccc; margin-bottom: 40px; }
+        .hero-image { flex: 1; text-align: center; }
+        .hero-image img { max-width: 100%; height: auto; animation: float 4s ease-in-out infinite; }
+        
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
+
+        .book-now-btn { background: var(--gradient-main); color: var(--black); font-weight: bold; padding: 15px 40px; border-radius: 30px; font-size: 1.2em; transition: 0.4s; display: inline-block; }
+        .book-now-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255, 69, 0, 0.4); color: var(--black); }
+
+        /* Services & Process */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .card { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 15px; border: 1px solid rgba(255, 69, 0, 0.2); transition: 0.4s; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(255, 69, 0, 0.2); border-color: var(--orange); }
+        .card h3 { color: var(--orange); font-size: 1.3em; margin-bottom: 10px; }
+
+        /* Testimonials */
+        .testimonial-card p { font-style: italic; font-size: 1.1em; margin-bottom: 20px; }
+        .testimonial-card h4 { color: var(--orange); text-align: right; }
+
+        /* Footer */
+        footer { background: var(--gradient-main); color: var(--black); text-align: center; padding: 100px 20px; margin-top: 50px; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; box-sizing: border-box; }
+        footer h2 { font-size: 4em; color: var(--black); margin-bottom: 10px; }
+        .footer-contacts { margin-top: 30px; font-size: 1.3em; color: var(--black); display: flex; justify-content: center; gap: 20px; }
+        .footer-email { margin-top: 15px; font-size: 1.3em; color: var(--black); }
+
+        /* Animations */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            nav ul { flex-wrap: wrap; justify-content: center; }
+            nav ul li { margin: 5px 10px; font-size: 0.9em; }
+            .hero { flex-direction: column; padding-top: 200px; text-align: center; }
+            .hero-content h1 { font-size: 2.8em; }
+            .footer-contacts { flex-direction: column; gap: 10px; font-size: 1.1em; }
+            footer h2 { font-size: 3em; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <!-- Notice the '../' which tells the code to look outside the jellypop folder for your main logo! -->
+            <img src="../logo.png" alt="Jelly Entertainment Logo">
+            <span class="jellypop-logo-text">JELLYPOP.</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Back to Main Web</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#clients">Clients</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <div class="hero-content fade-in">
+            <h1>Your Friendly <br><span class="gradient-text">Photobooth</span></h1>
+            <p>Jellypop was created so no moment goes uncaptured. In a world that moves fast, we believe memories deserve more than just a place in your camera roll — they should be printed, shared, and remembered. That’s why we built a photo booth that’s fast, fun, and easy to use. Jellypop exists to help people become <strong>#MemoryMakers</strong>. [1, 2]</p>
+            <a href="#contact" class="book-now-btn">BOOK NOW [2]</a>
+        </div>
+        <div class="hero-image fade-in">
+            <!-- INSERT YOUR 3D PHOTOBOOTH RENDER HERE -->
+            <img src="<insert 3D Photobooth image here>" alt="Jellypop Photobooth Stand">
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2 class="section-title fade-in gradient-text">Our Services [1]</h2>
+        
+        <h3 class="section-subtitle fade-in">Seamless Photobooth Experience [1]</h3>
+        <div class="grid-3">
+            <div class="card fade-in">
+                <h3>1. All-in-One Setup</h3>
+                <p>Solusi lengkap mulai dari kamera profesional, lighting, hingga backdrop yang estetis. [3]</p>
+            </div>
+            <div class="card fade-in">
+                <h3>2. Autopilot System & Expert Crew</h3>
+                <p>Didukung teknologi canggih dan kru yang ramah (helpful) untuk memastikan kelancaran sesi foto. [3]</p>
+            </div>
+            <div class="card fade-in">
+                <h3>3. Unlimited Sessions</h3>
+                <p>Tamu bebas berekspresi dengan sesi foto tak terbatas dan durasi yang leluasa. [3]</p>
+            </div>
+        </div>
+
+        <h3 class="section-subtitle fade-in">Personalized & Instant Keepsakes [1]</h3>
+        <div class="grid-3">
+            <div class="card fade-in">
+                <h3>1. Fully Customizable Designs</h3>
+                <p>Kebebasan kustomisasi frame sesuai identitas acara. [3]</p>
+            </div>
+            <div class="card fade-in">
+                <h3>2. Instant Hybrid Output</h3>
+                <p>Dapatkan hasil cetak fisik secara instan serta akses digital (softcopy) cepat melalui QR Code. [3]</p>
+            </div>
+            <div class="card fade-in">
+                <h3>3. Engaging Props & Accessories</h3>
+                <p>Berbagai pilihan aksesori unik untuk menambah keseruan dan kreativitas setiap jepretan. [1]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients & Testimonials Section -->
+    <section id="clients">
+        <h2 class="section-title fade-in gradient-text">Our Clients [4]</h2>
+        <div style="text-align: center; margin-bottom: 50px;" class="fade-in">
+            <!-- INSERT CLIENT LOGOS IMAGE HERE -->
+            <img src="<insert client logos image here>" alt="Jellypop Clients" style="max-width: 100%; border-radius: 15px;">
+        </div>
+
+        <h2 class="section-title fade-in gradient-text" style="margin-top: 100px;">Testimoni [4]</h2>
+        <div class="grid-3">
+            <div class="card testimonial-card fade-in">
+                <p>"Koordinasi sangat responsif dan informatif, ditambah kualitas cetak luar biasa dengan pilihan template yang variatif. Kru yang sangat friendly memberikan pengalaman sempurna 1000/100 untuk acara kami!" [2]</p>
+                <h4>- Ananta & Ghazali [2]</h4>
+            </div>
+            <div class="card testimonial-card fade-in">
+                <p>"Pelayanan super friendly dan tim yang sangat membantu membuat pengalaman kerja sama jadi luar biasa menyenangkan. Terima kasih banyak!" [2]</p>
+                <h4>- Fathun & Haikel [2]</h4>
+            </div>
+            <div class="card testimonial-card fade-in">
+                <p>"Pelayanan yang ramah, pilihan aksesori yang beragam, serta hasil foto yang berkualitas menjadikan JellyPop sebagai rekomendasi vendor photo booth terpercaya di wilayah Jabodetabek dan Bandung." [2, 4]</p>
+                <h4>- Aliya (Axel Education) [4]</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="fade-in">
+        <h2>Let’s Talk</h2>
+        <p style="color: var(--black); font-size: 1.3em; font-weight: 500;">Ready to become #MemoryMakers? Book your photobooth today!</p>
+        
+        <div class="footer-contacts">
+            <span class="contact-item"><strong>Billy:</strong> +62 8138 5395 100</span>
+            <span class="contact-item"><strong>Natan:</strong> +62 8138 9334 260</span>
+        </div>
+        <div class="footer-email">
+            <strong>Email:</strong> salesmarketing@jelly-eo.com
+        </div>
+        
+        <div style="margin-top: 30px; font-size: 1.5em;">
+            <strong style="color: var(--black);">Instagram:</strong> <a href="#" style="color: var(--black); text-decoration: underline;">@JELLYPOP.IG [4]</a>
+        </div>
+        
+        <p style="margin-top: 40px; font-size: 0.9em; color: var(--black);">© 2026 Jelly Entertainment. All Rights Reserved.</p>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Intersection Observer for scroll fade-in animations
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
