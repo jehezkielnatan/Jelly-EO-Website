@@ -444,88 +444,109 @@
                 width: fit-content; /* Hugs the text tightly so the whole block can be centered */
                 margin: 0 auto; 
         }
-        /* =========================================
-           PHOTOBOOTH BODY SHOWCASE - CLEAN FIX
+       /* =========================================
+           PHOTOBOOTH BODY SHOWCASE - DESKTOP LOCK
            ========================================= */
         .photobooth-showcase {
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
             background-color: #fafafa;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .photobooth-showcase h2 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--primary-red);
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .slider-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            gap: 10px;
+            gap: 20px;
         }
 
-        /* The Box that holds the slider */
         .booth-track {
             display: flex;
-            width: 100%;
-            max-width: 450px; 
-            height: 450px; /* Forces a consistent box size */
+            width: 400px !important; /* FIXED WIDTH FOR DESKTOP */
+            height: 500px !important; /* FIXED HEIGHT FOR DESKTOP */
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             scrollbar-width: none;
             align-items: center;
+            margin: 0 auto;
         }
         
         .booth-track::-webkit-scrollbar { display: none; }
 
         .booth-slide {
             flex: 0 0 100%;
-            scroll-snap-align: center;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100%;
+            scroll-snap-align: center;
         }
 
-        /* THE IMAGE FIX */
+        /* THE "FORCE SMALL" RULE */
         .booth-slide img {
-            max-height: 400px !important; /* Limits vertical height */
-            width: auto !important;      /* Keeps it from looking stretched */
-            max-width: 350px !important; /* NEW: Forces it to stay narrow on Desktop */
-            object-fit: contain;
-            filter: drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.1));
+            height: 400px !important;   /* Hard limit height */
+            width: auto !important;     /* Keep proportions */
+            max-width: 300px !important; /* Hard limit width */
+            object-fit: contain !important;
+            filter: drop-shadow(0px 25px 20px rgba(0,0,0,0.15));
+            transition: transform 0.3s ease;
             display: block;
-            margin: 0 auto;
         }
 
-        .booth-slide img:hover { transform: scale(1.02); }
-
-        /* Arrows & Dots */
         .slider-btn {
             background: none;
             border: none;
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--primary-red);
             cursor: pointer;
-            padding: 10px;
-            opacity: 0.5;
+            opacity: 0.6;
         }
-        .slider-btn:hover { opacity: 1; }
 
-        .slider-dots { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
-        .dot { width: 10px; height: 10px; border-radius: 50%; background-color: #ccc; cursor: pointer; }
-        .dot.active { background-color: var(--primary-red); width: 25px; border-radius: 5px; }
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
 
-        /* Hide arrows on mobile */
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #cccccc;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: var(--primary-red);
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        /* Responsive Fix for Mobile */
         @media (max-width: 768px) {
             .slider-btn { display: none; }
-            .booth-track { max-width: 100%; height: 400px; }
-            .booth-slide img { max-height: 350px; }
+            .booth-track { 
+                width: 100% !important; 
+                max-width: 320px !important; 
+                height: 400px !important; 
+            }
+            .booth-slide img { 
+                height: 320px !important; 
+                max-width: 250px !important; 
+            }
         }
     </style>
 </head>
