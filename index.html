@@ -252,86 +252,72 @@
 
 
         /* =========================================
-           MOBILE & TABLET RESPONSIVENESS OVERHAUL
+           MOBILE TYPOGRAPHY & LAYOUT OVERHAUL
            ========================================= */
         @media (max-width: 900px) {
-            /* 1. Mobile Menu Activation */
+            
+            /* GLOBAL MOBILE BASE */
+            body { font-size: 15px; } /* Normalizes base font size down slightly */
+            
+            /* 1. Mobile Menu */
             .menu-toggle { display: flex; }
             header { padding: 15px 20px; }
             header.scrolled { padding: 15px 20px; }
-            
             nav {
-                position: absolute;
-                top: 100%; left: 0; width: 100%;
-                background: rgba(5, 5, 5, 0.98);
-                backdrop-filter: blur(15px);
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(15px);
                 border-bottom: 1px solid rgba(255,69,0,0.3);
-                transform: translateY(-100%);
-                opacity: 0;
-                pointer-events: none;
-                transition: all 0.4s ease;
+                transform: translateY(-100%); opacity: 0; pointer-events: none; transition: all 0.4s ease;
             }
-            nav.open {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: all;
-            }
-            nav ul {
-                flex-direction: column;
-                padding: 30px 20px;
-                align-items: center;
-                gap: 25px;
-            }
+            nav.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+            nav ul { flex-direction: column; padding: 30px 20px; align-items: center; gap: 25px; }
             nav ul li { margin: 0; }
 
-            /* 2. Hero Section Mobile Fixes */
-            .hero h1 { font-size: 2.3em; letter-spacing: 1px; }
-            .hero p { font-size: 1.1em; }
+            /* 2. Hero Section Mobile Typography */
+            .hero h1 { font-size: 2.2em; letter-spacing: 0.5px; margin-bottom: 15px; } /* Scaled down */
+            .hero p { font-size: 1.05em; line-height: 1.5; padding: 0 10px; } /* Easier reading */
             .hero-btn-container { flex-direction: column; width: 100%; gap: 15px; }
             .hero-btn { width: 100%; padding: 15px 0; }
 
-            /* 3. Section Padding & Typography Scaling */
-            section { padding: 70px 20px; }
-            .section-title { font-size: 2em; margin-bottom: 40px; }
+            /* 3. Section Sizing & Titles */
+            section { padding: 60px 20px; }
+            .section-title { font-size: 1.8em; margin-bottom: 40px; } /* Calmed down the massive headers */
 
-            /* 4. ENABLE & TWEAK Sticky Stacking for Mobile Screens */
-            .sticky-card { 
-                padding: 35px 25px; 
-            }
-            /* Tighter spacing so they fit perfectly under the mobile header */
-            .sticky-card:nth-child(1) { top: 90px; }
-            .sticky-card:nth-child(2) { top: 110px; }
-            .sticky-card:nth-child(3) { top: 130px; }
+            /* 4. Sticky Stacking Services */
+            .sticky-card { padding: 35px 20px; }
+            .sticky-card:nth-child(1) { top: 80px; }
+            .sticky-card:nth-child(2) { top: 95px; }
+            .sticky-card:nth-child(3) { top: 110px; }
+            .sticky-card h3 { font-size: 1.6em; margin-bottom: 15px; } /* Smaller card headers */
+            .sticky-card ul { font-size: 1em; line-height: 1.5; } /* Standardized body text */
 
-            /* 5. Fix the Z-Pattern Layout for Mobile */
-            /* Forces text to ALWAYS be above the image on mobile */
-            .z-row, .z-row:nth-child(even) { 
-                flex-direction: column; 
-                gap: 30px; 
-                margin-bottom: 80px; 
-            }
-            .z-content { 
-                position: relative; /* Disable sticky text on mobile */
-                top: 0; 
-                min-width: 100%;
-            }
-            .z-content h3 { font-size: 2em; }
-            .stats-box { flex-direction: column; gap: 15px; }
+            /* 5. Z-Pattern Project Typography */
+            .z-row, .z-row:nth-child(even) { flex-direction: column; gap: 30px; margin-bottom: 80px; }
+            .z-content { position: relative; top: 0; min-width: 100%; }
+            .z-content h3 { font-size: 1.8em; margin-bottom: 15px; }
+            .z-content p { font-size: 1em; line-height: 1.6; }
+            .z-content ul { font-size: 1em; line-height: 1.6; }
+            
+            .stats-box { flex-direction: column; gap: 15px; padding: 20px; }
+            .stats-box h2 { font-size: 1.8em; }
+            .stats-box span { font-size: 0.85em; }
 
-            /* 6. Mini Cards / Portfolio Grid */
-            .mini-card { height: 350px; }
-            .see-more-btn { opacity: 1; transform: translateY(0); } /* Always visible on mobile */
-            .mini-card-overlay p { opacity: 1; transform: translateY(0); }
+            /* 6. Mini Cards */
+            .mini-card { height: 320px; }
+            .see-more-btn { opacity: 1; transform: translateY(0); font-size: 0.85em; } 
+            .mini-card-overlay p { opacity: 1; transform: translateY(0); font-size: 0.95em; line-height: 1.4; }
+            .mini-card-overlay h3 { font-size: 1.4em; }
 
-            /* 7. Footer Mobile Sizing */
+            /* 7. Testimonials */
+            .testimonial-card { padding: 30px 15px; }
+            .testimonial-card p { font-size: 1.05em; line-height: 1.6; }
+            .testimonial-card h4 { font-size: 0.85em; }
+
+            /* 8. Footer Mobile Typography */
             footer { padding: 80px 20px; }
-            footer h2 { font-size: 3em; letter-spacing: -1px; }
-            .contact-info { 
-                display: flex; 
-                flex-direction: column; 
-                font-size: 1.1em; 
-                gap: 15px; 
-            }
+            footer h2 { font-size: 2.5em; letter-spacing: -1px; }
+            footer p { font-size: 1em; }
+            .contact-info { display: flex; flex-direction: column; font-size: 1.05em; gap: 15px; margin-top: 30px; }
         }
     </style>
 </head>
