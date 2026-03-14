@@ -137,7 +137,6 @@
             line-height: 1.5;
         }
 
-        /* Updated Hero Button as a Link */
         .hero-btn {
             display: inline-block;
             text-decoration: none;
@@ -158,7 +157,7 @@
             color: var(--dark-text);
         }
 
-       /* Services Section */
+        /* Services Section (UPDATED UI) */
         .services-section {
             padding: 80px 20px;
             display: flex;
@@ -170,18 +169,29 @@
         .services-wrapper {
             position: relative;
             width: 100%;
-            max-width: 1150px; /* Made slightly wider to fit the text beautifully */
+            max-width: 1150px; 
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+        }
+
+        /* Container specifically to handle photobooth images gracefully */
+        .booth-showcase {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none; /* Allows clicking through to the cards below */
+            z-index: 3;
         }
 
         .services-box {
             background-color: var(--primary-red);
             color: var(--light-text);
             width: 100%;
-            /* THE FIX: 220px of left/right padding creates a safe zone so text never touches the images */
-            padding: 60px 220px; 
+            /* Adjusted padding to fit the new cards neatly */
+            padding: 60px 140px; 
             border-radius: 10px;
             position: relative;
             z-index: 2;
@@ -196,45 +206,61 @@
         .services-grid {
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            gap: 50px;
+        }
+
+        .service-row {
+            text-align: center;
         }
 
         .service-row h3 {
-            text-align: center;
-            font-size: 1.3rem;
-            margin-bottom: 25px;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            display: inline-block;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3); /* Subtle underline accent */
         }
 
+        /* Grid layout for the service cards */
         .service-columns {
-            display: flex;
-            gap: 30px;
-            justify-content: space-between;
-        }
-
-        .service-item {
-            flex: 1;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
             text-align: left;
         }
 
-        .service-item strong {
-            display: block; 
-            margin-bottom: 5px;
+        /* New Glassmorphism UI Cards */
+        .service-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 25px 20px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
+        .service-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .service-card strong {
+            display: block; 
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        /* Lowered the photobooth images */
         .booth-img {
             position: absolute;
-            top: 50%;
+            top: 58%; /* Changed from 50% to lower them on the screen */
             transform: translateY(-50%);
             height: 115%; 
-            /* THE FIX: Limits how wide the transparent image file can stretch */
             max-width: 280px; 
             object-fit: contain; 
-            z-index: 3;
         }
 
-        /* Adjusts the positioning to sit perfectly on the edges */
         .booth-left { left: -40px; }
         .booth-right { right: -40px; }
 
@@ -364,8 +390,35 @@
 
         /* Mobile Responsiveness */
         @media (max-width: 900px) {
-            .services-box { width: 90%; }
-            .booth-img { display: none; }
+            
+            /* Mobile Photobooth Display Fix */
+            .booth-showcase {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+                height: auto;
+                margin-bottom: -50px; /* Pulls the red box up to overlap them */
+                pointer-events: auto;
+            }
+
+            .booth-img {
+                position: relative;
+                top: auto;
+                left: auto;
+                right: auto;
+                transform: none;
+                height: 220px;
+                max-width: 45%; /* Keeps them side-by-side */
+            }
+
+            .services-box { 
+                padding: 70px 25px 40px 25px; /* Extra padding top so images don't block title */
+                width: 95%; 
+            }
+            
+            .service-columns { grid-template-columns: 1fr; } /* Stacks cards on mobile */
+
             .testi-card { width: 45%; }
             .testi-grid { flex-wrap: wrap; }
         }
@@ -382,9 +435,6 @@
             .hero h1 { font-size: 3.5rem; }
 
             .services-section { padding: 40px 10px; }
-            .services-box { width: 100%; padding: 30px 20px; }
-            .services-box h2 { font-size: 3rem; }
-            .service-columns { flex-direction: column; gap: 25px; }
 
             .testimonials { padding: 40px 20px; }
             .testimonials h2 { font-size: 3rem; }
@@ -441,8 +491,10 @@
         
         <div class="services-wrapper">
             
-            <img src="3DAsset JellyPop Body14@3x.png" alt="Left Photobooth Render" class="booth-img booth-left">
-            <img src="3DAsset JellyPop Body13@3x.png" alt="Right Photobooth Render" class="booth-img booth-right">
+            <div class="booth-showcase">
+                <img src="3DAsset JellyPop Body14@3x.png" alt="Left Photobooth Render" class="booth-img booth-left">
+                <img src="3DAsset JellyPop Body13@3x.png" alt="Right Photobooth Render" class="booth-img booth-right">
+            </div>
 
             <div class="services-box">
                 <h2 class="impact-title">OUR SERVICES</h2>
@@ -450,19 +502,40 @@
                 <div class="services-grid">
                     <div class="service-row">
                         <h3 class="roboto-bold">Seamless Photobooth Experience</h3>
+                        
                         <div class="service-columns">
-                            <div class="service-item"><strong class="roboto-bold">1. All-in-One Setup:</strong> Solusi lengkap mulai dari kamera profesional, lighting hingga backdrop yang estetis.</div>
-                            <div class="service-item"><strong class="roboto-bold">2. Autopilot System & Expert Crew:</strong> Didukung teknologi canggih dan kru yang ramah (helpful) untuk memastikan kelancaran sesi foto.</div>
-                            <div class="service-item"><strong class="roboto-bold">3. Unlimited Sessions:</strong> Tamu bebas berekspresi dengan sesi foto tak terbatas dan durasi yang leluasa.</div>
+                            <div class="service-card">
+                                <strong class="roboto-bold">1. All-in-One Setup:</strong>
+                                Solusi lengkap mulai dari kamera profesional, lighting hingga backdrop yang estetis.
+                            </div>
+                            <div class="service-card">
+                                <strong class="roboto-bold">2. Autopilot System & Expert Crew:</strong>
+                                Didukung teknologi canggih dan kru yang ramah (helpful) untuk memastikan kelancaran sesi foto.
+                            </div>
+                            <div class="service-card">
+                                <strong class="roboto-bold">3. Unlimited Sessions:</strong>
+                                Tamu bebas berekspresi dengan sesi foto tak terbatas dan durasi yang leluasa.
+                            </div>
                         </div>
+
                     </div>
 
                     <div class="service-row">
                         <h3 class="roboto-bold">Personalized & Instant Keepsakes</h3>
+                        
                         <div class="service-columns">
-                            <div class="service-item"><strong class="roboto-bold">1. Fully Customizable Design:</strong> Kebebasan kustomisasi frame sesuai identitas acara.</div>
-                            <div class="service-item"><strong class="roboto-bold">2. Instant Hybrid Output:</strong> Dapatkan hasil cetak fisik secara instan serta akses digital (softcopy) cepat melalui QR Code.</div>
-                            <div class="service-item"><strong class="roboto-bold">3. Engaging Props & Accessories:</strong> Berbagai pilihan aksesori unik untuk menambah keseruan dan kreativitas setiap jepretan.</div>
+                            <div class="service-card">
+                                <strong class="roboto-bold">1. Fully Customizable Design:</strong>
+                                Kebebasan kustomisasi frame sesuai identitas acara.
+                            </div>
+                            <div class="service-card">
+                                <strong class="roboto-bold">2. Instant Hybrid Output:</strong>
+                                Dapatkan hasil cetak fisik secara instan serta akses digital (softcopy) cepat melalui QR Code.
+                            </div>
+                            <div class="service-card">
+                                <strong class="roboto-bold">3. Engaging Props & Accessories:</strong>
+                                Berbagai pilihan aksesori unik untuk menambah keseruan dan kreativitas setiap jepretan.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -539,7 +612,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const slides = document.querySelectorAll('.slide');
             let currentSlide = 0;
-            const slideInterval = 3000; // Change image every 3 seconds
+            const slideInterval = 3000;
 
             setInterval(function() {
                 slides[currentSlide].classList.remove('active');
