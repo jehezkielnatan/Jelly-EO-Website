@@ -28,7 +28,7 @@
             --primary-red: #b31217;
             --dark-text: #1a1a1a;
             --light-text: #ffffff;
-            --muted-text: #666666;
+            --muted-text: #555555;
         }
 
         body {
@@ -244,82 +244,67 @@
 
 
         /* =========================================
-           NEW SERVICES ACCORDION UI (Desty Style)
+           SERVICES: STICKY FOLDER STACK (Desty Style)
            ========================================= */
         .services-section {
-            padding: 100px 20px;
-            background-color: #ffffff;
-        }
-
-        .services-container {
-            max-width: 800px;
-            margin: 0 auto;
+            background-color: var(--primary-red);
+            padding: 100px 20px 150px 20px;
         }
 
         .services-title {
             font-size: 4rem;
-            color: var(--primary-red);
-            margin-bottom: 50px;
+            color: var(--light-text);
+            margin-bottom: 60px;
             text-align: center;
         }
 
-        .accordion-item {
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .accordion-header {
-            width: 100%;
+        .stack-container {
+            max-width: 800px;
+            margin: 0 auto;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px 10px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            flex-direction: column;
+            gap: 40px; /* Space between cards before they stick */
         }
 
-        .accordion-header:hover {
-            background-color: #fafafa;
-        }
-
-        .accordion-title {
-            font-size: 1.8rem;
-            color: var(--dark-text);
-            transition: color 0.3s ease;
-        }
-
-        /* The plus/minus icon toggle */
-        .accordion-toggle {
-            font-size: 2.5rem;
-            color: var(--primary-red);
-            font-weight: 300;
-            line-height: 1;
+        .stack-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 -15px 30px rgba(0,0,0,0.2); /* Top shadow makes it look like it's sliding OVER the previous card */
+            
+            /* The Magic "Sticky" Effect */
+            position: sticky;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 250px;
             transition: transform 0.3s ease;
         }
 
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-            padding: 0 10px;
-        }
+        /* This creates the "layered folder" look. 
+           Each subsequent card stops a few pixels lower than the last one,
+           creating a beautiful stacked deck effect at the top of the screen. 
+        */
+        .stack-card:nth-child(1) { top: 120px; z-index: 1; }
+        .stack-card:nth-child(2) { top: 140px; z-index: 2; }
+        .stack-card:nth-child(3) { top: 160px; z-index: 3; }
+        .stack-card:nth-child(4) { top: 180px; z-index: 4; }
+        .stack-card:nth-child(5) { top: 200px; z-index: 5; }
+        .stack-card:nth-child(6) { top: 220px; z-index: 6; }
 
-        .accordion-content p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--muted-text);
-            margin: 0;
-            padding-bottom: 30px;
-        }
-
-        /* Active State Styles */
-        .accordion-item.active .accordion-title {
+        .stack-card h3 {
+            font-size: 2rem;
             color: var(--primary-red);
+            margin: 0 0 15px 0;
+            line-height: 1.2;
         }
 
-        .accordion-item.active .accordion-toggle {
-            transform: rotate(45deg); /* Turns the '+' into an 'x' */
+        .stack-card p {
+            font-size: 1.15rem;
+            color: var(--muted-text);
+            line-height: 1.6;
+            margin: 0;
         }
 
 
@@ -327,15 +312,15 @@
            TESTIMONIALS & CLIENTS
            ========================================= */
         .testimonials {
-            background: linear-gradient(to bottom, #ffffff 40%, var(--primary-red) 40%);
-            padding: 60px 50px;
+            background: linear-gradient(to bottom, #ffffff 40%, #f4f4f4 40%);
+            padding: 80px 50px;
             text-align: center;
         }
 
         .testimonials h2 {
             font-size: 4rem;
             color: var(--primary-red); 
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .testi-grid {
@@ -350,7 +335,7 @@
             overflow: hidden;
             width: 30%;
             text-align: left;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .testi-img { width: 100%; height: 200px; object-fit: cover; }
@@ -364,8 +349,8 @@
             height: 30px;
             background-color: var(--primary-red);
         }
-        .testi-content p { font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px; }
-        .testi-name { font-size: 0.9rem; text-transform: uppercase; }
+        .testi-content p { font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px; }
+        .testi-name { font-size: 0.9rem; text-transform: uppercase; color: var(--primary-red); }
 
         .clients {
             background-color: var(--primary-red);
@@ -377,7 +362,7 @@
             display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
             gap: 40px; max-width: 900px; margin: 0 auto;
         }
-        .client-logos img { max-height: 60px; max-width: 150px; object-fit: contain; }
+        .client-logos img { max-height: 60px; max-width: 150px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.9; }
 
         /* =========================================
            FOOTER
@@ -416,12 +401,26 @@
             .booth-slide img { height: 350px !important; }
             .slider-btn { display: none; }
 
-            /* Accordion Services Mobile */
-            .services-section { padding: 60px 15px; }
-            .services-title { font-size: 3rem; margin-bottom: 30px; }
-            .accordion-header { padding: 20px 5px; }
-            .accordion-title { font-size: 1.4rem; }
-            .accordion-content p { font-size: 1rem; }
+            /* Sticky Stack Services Mobile */
+            .services-section { padding: 80px 20px 100px 20px; }
+            .services-title { font-size: 3rem; margin-bottom: 40px; }
+            
+            .stack-container { gap: 25px; }
+            .stack-card { 
+                padding: 30px 25px; 
+                min-height: 200px; 
+                border-radius: 15px; 
+            }
+            .stack-card h3 { font-size: 1.5rem; }
+            .stack-card p { font-size: 1rem; }
+            
+            /* Adjust the sticky tops for smaller mobile screens */
+            .stack-card:nth-child(1) { top: 80px; }
+            .stack-card:nth-child(2) { top: 95px; }
+            .stack-card:nth-child(3) { top: 110px; }
+            .stack-card:nth-child(4) { top: 125px; }
+            .stack-card:nth-child(5) { top: 140px; }
+            .stack-card:nth-child(6) { top: 155px; }
 
             .testimonials { padding: 40px 20px; }
             .testimonials h2 { font-size: 3rem; }
@@ -485,69 +484,37 @@
     </section>
 
     <section id="services" class="services-section">
-        <div class="services-container">
-            <h2 class="impact-title services-title">OUR SERVICES</h2>
-            
-            <div class="accordion">
-                <div class="accordion-item active">
-                    <button class="accordion-header">
-                        <span class="accordion-title roboto-bold">All-in-One Setup</span>
-                        <span class="accordion-toggle">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <p>Solusi lengkap mulai dari kamera profesional, lighting hingga backdrop yang estetis.</p>
-                    </div>
-                </div>
+        <h2 class="impact-title services-title">OUR SERVICES</h2>
+        
+        <div class="stack-container">
+            <div class="stack-card">
+                <h3 class="roboto-bold">All-in-One Setup</h3>
+                <p>Solusi lengkap mulai dari kamera profesional, lighting hingga backdrop yang estetis.</p>
+            </div>
 
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span class="accordion-title roboto-bold">Autopilot System & Expert Crew</span>
-                        <span class="accordion-toggle">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <p>Didukung teknologi canggih dan kru yang ramah (helpful) untuk memastikan kelancaran sesi foto.</p>
-                    </div>
-                </div>
+            <div class="stack-card">
+                <h3 class="roboto-bold">Autopilot System & Expert Crew</h3>
+                <p>Didukung teknologi canggih dan kru yang ramah (helpful) untuk memastikan kelancaran sesi foto.</p>
+            </div>
 
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span class="accordion-title roboto-bold">Unlimited Sessions</span>
-                        <span class="accordion-toggle">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <p>Tamu bebas berekspresi dengan sesi foto tak terbatas dan durasi yang leluasa.</p>
-                    </div>
-                </div>
+            <div class="stack-card">
+                <h3 class="roboto-bold">Unlimited Sessions</h3>
+                <p>Tamu bebas berekspresi dengan sesi foto tak terbatas dan durasi yang leluasa.</p>
+            </div>
 
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span class="accordion-title roboto-bold">Fully Customizable Design</span>
-                        <span class="accordion-toggle">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <p>Kebebasan kustomisasi frame sesuai identitas acara.</p>
-                    </div>
-                </div>
+            <div class="stack-card">
+                <h3 class="roboto-bold">Fully Customizable Design</h3>
+                <p>Kebebasan kustomisasi frame sesuai identitas acara.</p>
+            </div>
 
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span class="accordion-title roboto-bold">Instant Hybrid Output</span>
-                        <span class="accordion-toggle">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <p>Dapatkan hasil cetak fisik secara instan serta akses digital (softcopy) cepat melalui QR Code.</p>
-                    </div>
-                </div>
+            <div class="stack-card">
+                <h3 class="roboto-bold">Instant Hybrid Output</h3>
+                <p>Dapatkan hasil cetak fisik secara instan serta akses digital (softcopy) cepat melalui QR Code.</p>
+            </div>
 
-                <div class="accordion-item">
-                    <button class="accordion-header">
-                        <span class="accordion-title roboto-bold">Engaging Props & Accessories</span>
-                        <span class="accordion-toggle">+</span>
-                    </button>
-                    <div class="accordion-content">
-                        <p>Berbagai pilihan aksesori unik untuk menambah keseruan dan kreativitas setiap jepretan.</p>
-                    </div>
-                </div>
+            <div class="stack-card">
+                <h3 class="roboto-bold">Engaging Props & Accessories</h3>
+                <p>Berbagai pilihan aksesori unik untuk menambah keseruan dan kreativitas setiap jepretan.</p>
             </div>
         </div>
     </section>
@@ -669,36 +636,6 @@
                     dots.forEach(d => d.classList.remove('active'));
                     if(dots[index]) dots[index].classList.add('active');
                 });
-            }
-
-            // 3. New Logic: Accordion Services
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-            accordionHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const item = header.parentElement;
-                    const isActive = item.classList.contains('active');
-
-                    // Close all accordion items first
-                    document.querySelectorAll('.accordion-item').forEach(i => {
-                        i.classList.remove('active');
-                        i.querySelector('.accordion-content').style.maxHeight = null;
-                    });
-
-                    // If the clicked item wasn't active, open it
-                    if (!isActive) {
-                        item.classList.add('active');
-                        const content = item.querySelector('.accordion-content');
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    }
-                });
-            });
-
-            // Make sure the first accordion item's height is set correctly on page load
-            const firstAccordion = document.querySelector('.accordion-item.active');
-            if(firstAccordion) {
-                const firstContent = firstAccordion.querySelector('.accordion-content');
-                firstContent.style.maxHeight = firstContent.scrollHeight + "px";
             }
         });
     </script>
