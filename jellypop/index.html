@@ -364,6 +364,15 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            text-decoration: none; /* Removes the default blue underline from links */
+            color: var(--dark-text); /* Keeps the text black */
+            transition: opacity 0.3s ease; /* Smooth hover transition */
+        }
+
+        /* Makes the links fade slightly when hovered over */
+        .contact-item:hover {
+            opacity: 0.6;
+        }
         }
 
         .contact-icon {
