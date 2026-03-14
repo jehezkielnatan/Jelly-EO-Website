@@ -169,20 +169,20 @@
         .services-wrapper {
             position: relative;
             width: 100%;
-            max-width: 1150px; 
+            /* WIDENED so the 3 cards still look good when squeezed */
+            max-width: 1250px; 
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Container specifically to handle photobooth images gracefully */
         .booth-showcase {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            pointer-events: none; /* Allows clicking through to the cards below */
+            pointer-events: none; 
             z-index: 3;
         }
 
@@ -190,8 +190,8 @@
             background-color: var(--primary-red);
             color: var(--light-text);
             width: 100%;
-            /* Adjusted padding to fit the new cards neatly */
-            padding: 60px 140px; 
+            /* THE FIX: Massive 260px padding on left/right to protect text from images */
+            padding: 60px 260px; 
             border-radius: 10px;
             position: relative;
             z-index: 2;
@@ -218,10 +218,9 @@
             margin-bottom: 30px;
             display: inline-block;
             padding-bottom: 8px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3); /* Subtle underline accent */
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3); 
         }
 
-        /* Grid layout for the service cards */
         .service-columns {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -229,7 +228,6 @@
             text-align: left;
         }
 
-        /* New Glassmorphism UI Cards */
         .service-card {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -251,18 +249,19 @@
             margin-bottom: 8px;
         }
 
-        /* Lowered the photobooth images */
         .booth-img {
             position: absolute;
-            top: 58%; /* Changed from 50% to lower them on the screen */
+            top: 55%; 
             transform: translateY(-50%);
-            height: 115%; 
-            max-width: 280px; 
+            height: 110%; 
+            /* THE FIX: Slightly narrower max-width to control the overlap */
+            max-width: 250px; 
             object-fit: contain; 
         }
 
-        .booth-left { left: -40px; }
-        .booth-right { right: -40px; }
+        /* Pushed them out slightly further */
+        .booth-left { left: -50px; }
+        .booth-right { right: -50px; }
 
         /* Testimonials Section */
         .testimonials {
