@@ -436,27 +436,48 @@
         } /* <--- THIS WAS THE MISSING BRACKET FIXING THE WHOLE SITE! */
 
         /* =========================================
-           PHOTOBOOTH BODY - GLOBAL DESKTOP LOCK
+           PHOTOBOOTH BODY - ULTIMATE REPAIR
            ========================================= */
-        
-        /* This now runs on Desktop because it is OUTSIDE the media query */
         .photobooth-showcase {
-            padding: 60px 20px;
+            padding: 80px 20px;
+            text-align: center;
             background-color: #fafafa;
         }
 
+        .slider-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative; /* Keep arrows positioned relative to this */
+        }
+
         .booth-track {
-            display: flex !important;
-            width: 400px !important; 
-            height: 500px !important;
-            margin: 0 auto !important;
-            overflow: hidden !important; 
-            position: relative;
+            display: flex;
+            width: 400px; 
+            height: 500px;
+            margin: 0 15px;
+            overflow-x: auto; /* Re-enable swiping */
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .booth-track::-webkit-scrollbar { display: none; }
+
+        .booth-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            scroll-snap-align: center;
         }
 
         .booth-slide img {
-            display: block !important;
-            margin: 0 auto !important;
             height: 400px !important; 
             width: auto !important;
             max-width: 300px !important; 
@@ -464,26 +485,38 @@
             filter: drop-shadow(0px 25px 20px rgba(0,0,0,0.15));
         }
 
-        .booth-slide {
-            flex: 0 0 100% !important;
-            width: 100% !important;
-            height: 100% !important;
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
+        /* Arrows Styling */
+        .slider-btn {
+            background: none;
+            border: none;
+            font-size: 3rem; /* Make them visible */
+            color: var(--primary-red);
+            cursor: pointer;
+            z-index: 10;
+            padding: 10px;
+            transition: transform 0.2s;
         }
+        .slider-btn:hover { transform: scale(1.2); }
 
-        /* Small overrides for mobile booth specifically */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: #ccc; cursor: pointer; }
+        .dot.active { background: var(--primary-red); width: 30px; border-radius: 6px; }
+
+        /* Mobile Specifics */
         @media (max-width: 768px) {
-            .booth-track {
-                width: 280px !important;
-                height: 400px !important;
+            .booth-track { 
+                width: 300px; 
+                height: 420px; 
+                margin: 0 auto;
             }
-            .booth-slide img {
-                height: 320px !important;
-                max-width: 240px !important;
-            }
-            .slider-btn { display: none; }
+            .booth-slide img { height: 350px !important; }
+            .slider-btn { display: none; } /* Hide arrows on phone as they block the image */
+            .photobooth-showcase h2 { font-size: 2.5rem; } /* Fix title size on mobile */
         }
     </style>
 </head>
@@ -678,17 +711,20 @@
             let currentBoothSlide = 0; // Tracks which photobooth we are looking at
 
             function updateBoothSlider(index) {
-                // Prevents the slider from breaking if you click past the available images
                 if (index < 0) index = 0;
                 if (index >= slidesBody.length) index = slidesBody.length - 1;
                 
                 currentBoothSlide = index;
                 
-                // Scrolls accurately based on the exact width of the container
+                // Use the scrollLeft property to move the track
                 track.scrollTo({
-                    left: currentBoothSlide * track.offsetWidth,
+                    left: index * track.clientWidth,
                     behavior: 'smooth'
                 });
+
+                // Update dots manually when clicking buttons
+                dots.forEach(d => d.classList.remove('active'));
+                dots[index].classList.add('active');
             }
 
             // Click events for buttons (Now calculates +1 or -1)
