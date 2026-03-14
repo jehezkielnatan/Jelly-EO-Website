@@ -158,20 +158,19 @@
             color: var(--dark-text);
         }
 
-        /* Services Section */
+       /* Services Section */
         .services-section {
             padding: 80px 20px;
             display: flex;
             justify-content: center;
             background-color: #ffffff;
-            overflow: hidden; /* Prevents horizontal scroll on smaller screens */
+            overflow: hidden; 
         }
 
-        /* The new wrapper locks the size so it never stretches too wide */
         .services-wrapper {
             position: relative;
             width: 100%;
-            max-width: 950px; 
+            max-width: 1150px; /* Made slightly wider to fit the text beautifully */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -181,7 +180,8 @@
             background-color: var(--primary-red);
             color: var(--light-text);
             width: 100%;
-            padding: 60px 80px; /* Adjusted padding to give text breathing room */
+            /* THE FIX: 220px of left/right padding creates a safe zone so text never touches the images */
+            padding: 60px 220px; 
             border-radius: 10px;
             position: relative;
             z-index: 2;
@@ -219,22 +219,24 @@
         }
 
         .service-item strong {
-            display: block; /* Puts the bold text on its own line like your design */
+            display: block; 
             margin-bottom: 5px;
         }
 
-        /* Lock the photobooths directly to the wrapper, not the screen */
         .booth-img {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            height: 115%; /* Makes them pop slightly above and below the red box */
+            height: 115%; 
+            /* THE FIX: Limits how wide the transparent image file can stretch */
+            max-width: 280px; 
+            object-fit: contain; 
             z-index: 3;
         }
 
-        /* Use negative pixels to push them just outside the 950px box */
-        .booth-left { left: -100px; }
-        .booth-right { right: -100px; }
+        /* Adjusts the positioning to sit perfectly on the edges */
+        .booth-left { left: -40px; }
+        .booth-right { right: -40px; }
 
         /* Testimonials Section */
         .testimonials {
