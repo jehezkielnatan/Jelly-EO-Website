@@ -705,25 +705,33 @@
                 slides[currentSlide].classList.add('active');
             }, slideInterval);
 
-            // 2. Photobooth Body Slider Logic
+            // 2. Photobooth Body Slider Logic (FIXED)
             const track = document.querySelector('.booth-track');
             const slidesBody = document.querySelectorAll('.booth-slide');
             const dots = document.querySelectorAll('.dot');
             const prevBtn = document.querySelector('.prev-btn');
             const nextBtn = document.querySelector('.next-btn');
+            
+            let currentBoothSlide = 0; // Tracks which photobooth we are looking at
 
             function updateBoothSlider(index) {
-                // Scroll to the specific slide
+                // Prevents the slider from breaking if you click past the available images
+                if (index < 0) index = 0;
+                if (index >= slidesBody.length) index = slidesBody.length - 1;
+                
+                currentBoothSlide = index;
+                
+                // Scrolls accurately based on the exact width of the container
                 track.scrollTo({
-                    left: slidesBody[index].offsetLeft,
+                    left: currentBoothSlide * track.offsetWidth,
                     behavior: 'smooth'
                 });
             }
 
-            // Click events for buttons
+            // Click events for buttons (Now calculates +1 or -1)
             if (prevBtn && nextBtn) {
-                prevBtn.addEventListener('click', () => updateBoothSlider(0));
-                nextBtn.addEventListener('click', () => updateBoothSlider(1));
+                prevBtn.addEventListener('click', () => updateBoothSlider(currentBoothSlide - 1));
+                nextBtn.addEventListener('click', () => updateBoothSlider(currentBoothSlide + 1));
             }
 
             // Click events for dots
@@ -731,11 +739,13 @@
                 dot.addEventListener('click', () => updateBoothSlider(index));
             });
 
-            // Update dots when swiping on mobile
+            // Sync the dots and the tracking variable when users swipe on mobile
             if (track) {
                 track.addEventListener('scroll', () => {
                     let scrollPosition = track.scrollLeft;
                     let index = Math.round(scrollPosition / track.offsetWidth);
+                    
+                    currentBoothSlide = index; // Keeps the arrows in sync with swiping
                     
                     dots.forEach(d => d.classList.remove('active'));
                     if(dots[index]) {
