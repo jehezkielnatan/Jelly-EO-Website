@@ -494,13 +494,13 @@
 
         /* THE IMAGE FIX */
         .booth-slide img {
-            max-height: 400px !important; /* Limits height */
-            max-width: 90% !important;   /* Limits width */
-            width: auto !important;      /* Prevents stretching */
-            height: auto !important;     /* Keeps proportions */
+            max-height: 400px !important; /* Limits vertical height */
+            width: auto !important;      /* Keeps it from looking stretched */
+            max-width: 350px !important; /* NEW: Forces it to stay narrow on Desktop */
             object-fit: contain;
             filter: drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.1));
-            transition: transform 0.3s ease;
+            display: block;
+            margin: 0 auto;
         }
 
         .booth-slide img:hover { transform: scale(1.02); }
