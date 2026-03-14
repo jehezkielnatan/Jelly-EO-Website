@@ -28,7 +28,7 @@
             --primary-red: #b31217;
             --dark-text: #1a1a1a;
             --light-text: #ffffff;
-            --muted-text: #e0e0e0; /* Added a softer color for body text */
+            --muted-text: #666666;
         }
 
         body {
@@ -164,7 +164,9 @@
             color: var(--dark-text);
         }
 
-        /* Photobooth Body Showcase */
+        /* =========================================
+           PHOTOBOOTH BODY SHOWCASE
+           ========================================= */
         .photobooth-showcase {
             padding: 80px 20px;
             text-align: center;
@@ -219,7 +221,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* Arrows for Photobooth Body */
         .slider-btn {
             background: none;
             border: none;
@@ -241,99 +242,90 @@
         .dot { width: 12px; height: 12px; border-radius: 50%; background: #ccc; cursor: pointer; }
         .dot.active { background: var(--primary-red); width: 30px; border-radius: 6px; }
 
+
         /* =========================================
-           SERVICES SECTION - UX UPDATES
+           NEW SERVICES ACCORDION UI (Desty Style)
            ========================================= */
         .services-section {
-            padding: 80px 20px;
-            display: flex;
-            justify-content: center;
+            padding: 100px 20px;
             background-color: #ffffff;
         }
 
-        .services-wrapper {
-            width: 100%;
-            max-width: 1250px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .services-container {
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .services-box {
-            background-color: var(--primary-red);
-            color: var(--light-text);
-            width: 100%;
-            padding: 60px 80px; 
-            border-radius: 10px;
-        }
-
-        .services-box h2 {
+        .services-title {
             font-size: 4rem;
+            color: var(--primary-red);
             margin-bottom: 50px;
             text-align: center;
-            line-height: 1;
         }
 
-        .services-grid {
+        .accordion-item {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .accordion-header {
+            width: 100%;
             display: flex;
-            flex-direction: column;
-            gap: 60px; /* More breathing room between sections */
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .service-row {
-            text-align: center;
+        .accordion-header:hover {
+            background-color: #fafafa;
         }
 
-        .service-row h3 {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            display: inline-block;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.4); 
-            letter-spacing: 1px;
+        .accordion-title {
+            font-size: 1.8rem;
+            color: var(--dark-text);
+            transition: color 0.3s ease;
         }
 
-        /* Desktop Grid - No swiping on large screens */
-        .service-track {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            text-align: left;
-        }
-
-        /* Sleek Card Design */
-        .service-card {
-            background: rgba(255, 255, 255, 0.05); /* Very subtle background */
-            border-left: 3px solid rgba(255, 255, 255, 0.2); /* Edge styling instead of full box */
-            padding: 25px 30px;
-            font-size: 1rem;
-            line-height: 1.6;
-            transition: transform 0.3s ease, background 0.3s ease, border-left 0.3s ease;
-            color: var(--muted-text); /* Softer body text */
+        /* The plus/minus icon toggle */
+        .accordion-toggle {
+            font-size: 2.5rem;
+            color: var(--primary-red);
             font-weight: 300;
+            line-height: 1;
+            transition: transform 0.3s ease;
         }
 
-        .service-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-            border-left: 3px solid #ffffff;
-            color: #ffffff;
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            padding: 0 10px;
         }
 
-        /* Standout Headings */
-        .service-card strong {
-            display: block; 
-            font-size: 1.3rem; /* Much larger than body text */
-            margin-bottom: 12px;
-            color: #ffffff; /* Bright white to pop */
-            letter-spacing: 0.5px;
+        .accordion-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--muted-text);
+            margin: 0;
+            padding-bottom: 30px;
         }
 
-        /* Services Swiping Dots (Hidden on Desktop) */
-        .service-dots { display: none; }
+        /* Active State Styles */
+        .accordion-item.active .accordion-title {
+            color: var(--primary-red);
+        }
+
+        .accordion-item.active .accordion-toggle {
+            transform: rotate(45deg); /* Turns the '+' into an 'x' */
+        }
 
 
-        /* Testimonials */
+        /* =========================================
+           TESTIMONIALS & CLIENTS
+           ========================================= */
         .testimonials {
             background: linear-gradient(to bottom, #ffffff 40%, var(--primary-red) 40%);
             padding: 60px 50px;
@@ -375,7 +367,6 @@
         .testi-content p { font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px; }
         .testi-name { font-size: 0.9rem; text-transform: uppercase; }
 
-        /* Clients Section */
         .clients {
             background-color: var(--primary-red);
             padding: 60px 50px 100px 50px;
@@ -388,7 +379,9 @@
         }
         .client-logos img { max-height: 60px; max-width: 150px; object-fit: contain; }
 
-        /* Footer */
+        /* =========================================
+           FOOTER
+           ========================================= */
         footer {
             background-color: #ffffff; padding: 40px 50px;
             display: flex; justify-content: space-between; align-items: center;
@@ -409,7 +402,6 @@
         @media (max-width: 900px) {
             .testi-card { width: 45%; }
             .testi-grid { flex-wrap: wrap; }
-            .services-box { padding: 60px 30px; }
         }
 
         @media (max-width: 768px) {
@@ -424,41 +416,12 @@
             .booth-slide img { height: 350px !important; }
             .slider-btn { display: none; }
 
-            /* SERVICES SECTION: The Swipe Track Upgrade */
-            .services-box h2 { font-size: 2.8rem; margin-bottom: 30px; }
-            .service-row h3 { font-size: 1.5rem; margin-bottom: 20px; }
-            
-            /* Turns grid into a swipeable track */
-            .service-track {
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                scroll-behavior: smooth;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                gap: 15px; /* Gap between cards when swiping */
-                padding-bottom: 10px; /* Space for shadow */
-            }
-            .service-track::-webkit-scrollbar { display: none; }
-
-            /* Forces cards to fit the screen */
-            .service-card {
-                flex: 0 0 85%; /* Shows a peek of the next card so users know to swipe */
-                scroll-snap-align: center;
-                background: rgba(255, 255, 255, 0.08); /* Slightly more visible on mobile */
-                border-left: 4px solid var(--light-text);
-            }
-
-            /* Show Dots for Services */
-            .service-dots {
-                display: flex;
-                justify-content: center;
-                gap: 8px;
-                margin-top: 15px;
-            }
-            .s-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); }
-            .s-dot.active { background: #ffffff; width: 20px; border-radius: 4px; }
-
+            /* Accordion Services Mobile */
+            .services-section { padding: 60px 15px; }
+            .services-title { font-size: 3rem; margin-bottom: 30px; }
+            .accordion-header { padding: 20px 5px; }
+            .accordion-title { font-size: 1.4rem; }
+            .accordion-content p { font-size: 1rem; }
 
             .testimonials { padding: 40px 20px; }
             .testimonials h2 { font-size: 3rem; }
@@ -521,62 +484,69 @@
         </div>
     </section>
 
-   <section id="services" class="services-section">
-        <div class="services-wrapper">
-            <div class="services-box">
-                <h2 class="impact-title">OUR SERVICES</h2>
-                
-                <div class="services-grid">
-                    <div class="service-row">
-                        <h3 class="impact-title">Seamless Photobooth Experience</h3>
-                        
-                        <div class="service-track" id="track-1">
-                            <div class="service-card">
-                                <strong class="roboto-bold">All-in-One Setup</strong>
-                                Solusi lengkap mulai dari kamera profesional, lighting hingga backdrop yang estetis.
-                            </div>
-                            <div class="service-card">
-                                <strong class="roboto-bold">Autopilot System & Expert Crew</strong>
-                                Didukung teknologi canggih dan kru yang ramah (helpful) untuk memastikan kelancaran sesi foto.
-                            </div>
-                            <div class="service-card">
-                                <strong class="roboto-bold">Unlimited Sessions</strong>
-                                Tamu bebas berekspresi dengan sesi foto tak terbatas dan durasi yang leluasa.
-                            </div>
-                        </div>
-                        
-                        <div class="service-dots" id="dots-1">
-                            <span class="s-dot active"></span>
-                            <span class="s-dot"></span>
-                            <span class="s-dot"></span>
-                        </div>
+    <section id="services" class="services-section">
+        <div class="services-container">
+            <h2 class="impact-title services-title">OUR SERVICES</h2>
+            
+            <div class="accordion">
+                <div class="accordion-item active">
+                    <button class="accordion-header">
+                        <span class="accordion-title roboto-bold">All-in-One Setup</span>
+                        <span class="accordion-toggle">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Solusi lengkap mulai dari kamera profesional, lighting hingga backdrop yang estetis.</p>
                     </div>
+                </div>
 
-                    <div class="service-row">
-                        <h3 class="impact-title">Personalized & Instant Keepsakes</h3>
-                        
-                        <div class="service-track" id="track-2">
-                            <div class="service-card">
-                                <strong class="roboto-bold">Fully Customizable Design</strong>
-                                Kebebasan kustomisasi frame sesuai identitas acara.
-                            </div>
-                            <div class="service-card">
-                                <strong class="roboto-bold">Instant Hybrid Output</strong>
-                                Dapatkan hasil cetak fisik secara instan serta akses digital (softcopy) cepat melalui QR Code.
-                            </div>
-                            <div class="service-card">
-                                <strong class="roboto-bold">Engaging Props & Accessories</strong>
-                                Berbagai pilihan aksesori unik untuk menambah keseruan dan kreativitas setiap jepretan.
-                            </div>
-                        </div>
-
-                        <div class="service-dots" id="dots-2">
-                            <span class="s-dot active"></span>
-                            <span class="s-dot"></span>
-                            <span class="s-dot"></span>
-                        </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-title roboto-bold">Autopilot System & Expert Crew</span>
+                        <span class="accordion-toggle">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Didukung teknologi canggih dan kru yang ramah (helpful) untuk memastikan kelancaran sesi foto.</p>
                     </div>
+                </div>
 
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-title roboto-bold">Unlimited Sessions</span>
+                        <span class="accordion-toggle">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Tamu bebas berekspresi dengan sesi foto tak terbatas dan durasi yang leluasa.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-title roboto-bold">Fully Customizable Design</span>
+                        <span class="accordion-toggle">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Kebebasan kustomisasi frame sesuai identitas acara.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-title roboto-bold">Instant Hybrid Output</span>
+                        <span class="accordion-toggle">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Dapatkan hasil cetak fisik secara instan serta akses digital (softcopy) cepat melalui QR Code.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span class="accordion-title roboto-bold">Engaging Props & Accessories</span>
+                        <span class="accordion-toggle">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Berbagai pilihan aksesori unik untuk menambah keseruan dan kreativitas setiap jepretan.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -642,7 +612,7 @@
         </div>
     </footer>
 
-   <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             
             // 1. Hero Background Carousel Logic
@@ -701,27 +671,35 @@
                 });
             }
 
-            // 3. New Logic: Mobile Services Swipe Tracker
-            function setupServiceSwipe(trackId, dotsContainerId) {
-                const sTrack = document.getElementById(trackId);
-                const sDots = document.querySelectorAll(`#${dotsContainerId} .s-dot`);
+            // 3. New Logic: Accordion Services
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
 
-                if(sTrack && sDots.length > 0) {
-                    sTrack.addEventListener('scroll', () => {
-                        // Calculate which card is most visible based on scroll position
-                        let scrollPosition = sTrack.scrollLeft;
-                        let cardWidth = sTrack.offsetWidth * 0.85; // Because flex is 85%
-                        let index = Math.round(scrollPosition / cardWidth);
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    const isActive = item.classList.contains('active');
 
-                        sDots.forEach(d => d.classList.remove('active'));
-                        if(sDots[index]) sDots[index].classList.add('active');
+                    // Close all accordion items first
+                    document.querySelectorAll('.accordion-item').forEach(i => {
+                        i.classList.remove('active');
+                        i.querySelector('.accordion-content').style.maxHeight = null;
                     });
-                }
-            }
 
-            // Initialize both service tracks
-            setupServiceSwipe('track-1', 'dots-1');
-            setupServiceSwipe('track-2', 'dots-2');
+                    // If the clicked item wasn't active, open it
+                    if (!isActive) {
+                        item.classList.add('active');
+                        const content = item.querySelector('.accordion-content');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            });
+
+            // Make sure the first accordion item's height is set correctly on page load
+            const firstAccordion = document.querySelector('.accordion-item.active');
+            if(firstAccordion) {
+                const firstContent = firstAccordion.querySelector('.accordion-content');
+                firstContent.style.maxHeight = firstContent.scrollHeight + "px";
+            }
         });
     </script>
 
