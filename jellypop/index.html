@@ -445,116 +445,87 @@
                 margin: 0 auto; 
         }
         /* =========================================
-           PHOTOBOOTH BODY SHOWCASE (NEW)
+           PHOTOBOOTH BODY SHOWCASE - CLEAN FIX
            ========================================= */
         .photobooth-showcase {
-            padding: 80px 20px;
+            padding: 60px 20px;
             text-align: center;
-            background-color: #fafafa; /* Very light grey to make the white booths pop */
+            background-color: #fafafa;
         }
 
         .photobooth-showcase h2 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--primary-red);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .slider-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            gap: 20px;
+            gap: 10px;
         }
 
-        /* 1. The Container (The "Window" you look through) */
+        /* The Box that holds the slider */
         .booth-track {
             display: flex;
             width: 100%;
-            max-width: 400px; 
-            height: 450px; /* Added height to keep it stable */
+            max-width: 450px; 
+            height: 450px; /* Forces a consistent box size */
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; 
-            align-items: center; /* Centers the image vertically */
+            scrollbar-width: none;
+            align-items: center;
         }
         
-        /* Hide scrollbars */
-        .booth-track::-webkit-scrollbar {
-            display: none;
-        }
+        .booth-track::-webkit-scrollbar { display: none; }
 
-        /* 2. The Individual Slide */
         .booth-slide {
             flex: 0 0 100%;
             scroll-snap-align: center;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100%;
         }
 
-        /* 3. The Image Itself (The "Main Fix") */
+        /* THE IMAGE FIX */
         .booth-slide img {
-            height: 380px !important; /* Forces a consistent height */
-            width: auto !important;   /* Keeps it from stretching wide */
-            max-width: 90%;          /* Keeps it from hitting the edges */
-            object-fit: contain; 
-            filter: drop-shadow(0px 25px 20px rgba(0, 0, 0, 0.15));
+            max-height: 400px !important; /* Limits height */
+            max-width: 90% !important;   /* Limits width */
+            width: auto !important;      /* Prevents stretching */
+            height: auto !important;     /* Keeps proportions */
+            object-fit: contain;
+            filter: drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.1));
             transition: transform 0.3s ease;
         }
 
-        /* 4. Hover effect */
-        .booth-slide img:hover {
-            transform: scale(1.05);
-        }
+        .booth-slide img:hover { transform: scale(1.02); }
 
-        /* Arrows */
+        /* Arrows & Dots */
         .slider-btn {
             background: none;
             border: none;
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--primary-red);
             cursor: pointer;
             padding: 10px;
-            transition: transform 0.2s;
-            opacity: 0.6;
+            opacity: 0.5;
         }
+        .slider-btn:hover { opacity: 1; }
 
-        .slider-btn:hover {
-            transform: scale(1.2);
-            opacity: 1;
-        }
+        .slider-dots { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background-color: #ccc; cursor: pointer; }
+        .dot.active { background-color: var(--primary-red); width: 25px; border-radius: 5px; }
 
-        /* Dots */
-        .slider-dots {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #cccccc;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        /* Premium UI touch: The active dot stretches into a pill shape */
-        .dot.active {
-            background-color: var(--primary-red);
-            width: 30px;
-            border-radius: 6px;
-        }
-
-        /* Hide arrows on mobile since users will just swipe */
+        /* Hide arrows on mobile */
         @media (max-width: 768px) {
             .slider-btn { display: none; }
+            .booth-track { max-width: 100%; height: 400px; }
+            .booth-slide img { max-height: 350px; }
         }
     </style>
 </head>
