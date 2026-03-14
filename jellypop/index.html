@@ -191,7 +191,7 @@
             color: var(--light-text);
             width: 100%;
             /* THE FIX: Massive 260px padding on left/right to protect text from images */
-            padding: 60px 260px; 
+            padding: 60px 80px; 
             border-radius: 10px;
             position: relative;
             z-index: 2;
@@ -248,20 +248,6 @@
             font-size: 1.05rem;
             margin-bottom: 8px;
         }
-
-        .booth-img {
-            position: absolute;
-            top: 55%; 
-            transform: translateY(-50%);
-            height: 110%; 
-            /* THE FIX: Slightly narrower max-width to control the overlap */
-            max-width: 250px; 
-            object-fit: contain; 
-        }
-
-        /* Pushed them out slightly further */
-        .booth-left { left: -50px; }
-        .booth-right { right: -50px; }
 
         /* Testimonials Section */
         .testimonials {
@@ -390,26 +376,6 @@
         /* Mobile Responsiveness */
         @media (max-width: 900px) {
             
-            /* Mobile Photobooth Display Fix */
-            .booth-showcase {
-                position: relative;
-                display: flex;
-                justify-content: center;
-                gap: 15px;
-                height: auto;
-                margin-bottom: -50px; /* Pulls the red box up to overlap them */
-                pointer-events: auto;
-            }
-
-            .booth-img {
-                position: relative;
-                top: auto;
-                left: auto;
-                right: auto;
-                transform: none;
-                height: 220px;
-                max-width: 45%; /* Keeps them side-by-side */
-            }
 
             .services-box { 
                 padding: 70px 25px 40px 25px; /* Extra padding top so images don't block title */
@@ -452,6 +418,112 @@
             }
             .contact-item { justify-content: center; }
         }
+        /* =========================================
+           PHOTOBOOTH BODY SHOWCASE (NEW)
+           ========================================= */
+        .photobooth-showcase {
+            padding: 80px 20px;
+            text-align: center;
+            background-color: #fafafa; /* Very light grey to make the white booths pop */
+        }
+
+        .photobooth-showcase h2 {
+            font-size: 3.5rem;
+            color: var(--primary-red);
+            margin-bottom: 30px;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        /* Native swipeable container for mobile */
+        .booth-track {
+            display: flex;
+            width: 100%;
+            max-width: 400px; /* Constrains width so arrows sit nicely beside it */
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Hides scrollbar on Firefox */
+        }
+        
+        .booth-track::-webkit-scrollbar {
+            display: none; /* Hides scrollbar on Chrome/Safari */
+        }
+
+        .booth-slide {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .booth-slide img {
+            max-height: 400px;
+            width: auto;
+            object-fit: contain;
+            /* Premium UI touch: Adds a soft, realistic drop shadow to the PNGs */
+            filter: drop-shadow(0px 25px 20px rgba(0, 0, 0, 0.15));
+            transition: transform 0.3s ease;
+        }
+
+        .booth-slide img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Arrows */
+        .slider-btn {
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            cursor: pointer;
+            padding: 10px;
+            transition: transform 0.2s;
+            opacity: 0.6;
+        }
+
+        .slider-btn:hover {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+
+        /* Dots */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #cccccc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Premium UI touch: The active dot stretches into a pill shape */
+        .dot.active {
+            background-color: var(--primary-red);
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        /* Hide arrows on mobile since users will just swipe */
+        @media (max-width: 768px) {
+            .slider-btn { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -485,23 +557,37 @@
             <a href="https://wa.me/6285121306628?text=Hi%20Jellypop,%20I'd%20like%20to%20book%20a%20photobooth!" class="hero-btn roboto-bold" target="_blank">BOOK NOW</a>
         </div>
     </section>
-
-    <section id="services" class="services-section">
+<section class="photobooth-showcase">
+        <h2 class="impact-title">JELLYPOP PHOTOBOOTH BODY</h2>
         
-        <div class="services-wrapper">
+        <div class="slider-wrapper">
+            <button class="slider-btn prev-btn">&#10094;</button>
             
-            <div class="booth-showcase">
-                <img src="3DAsset JellyPop Body14@3x.png" alt="Left Photobooth Render" class="booth-img booth-left">
-                <img src="3DAsset JellyPop Body13@3x.png" alt="Right Photobooth Render" class="booth-img booth-right">
+            <div class="booth-track">
+                <div class="booth-slide">
+                    <img src="3DAsset JellyPop Body14@3x.png" alt="Jellypop Body 1">
+                </div>
+                <div class="booth-slide">
+                    <img src="3DAsset JellyPop Body13@3x.png" alt="Jellypop Body 2">
+                </div>
             </div>
 
+            <button class="slider-btn next-btn">&#10095;</button>
+        </div>
+
+        <div class="slider-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+        </div>
+    </section>
+   <section id="services" class="services-section">
+        <div class="services-wrapper">
             <div class="services-box">
                 <h2 class="impact-title">OUR SERVICES</h2>
                 
                 <div class="services-grid">
                     <div class="service-row">
                         <h3 class="roboto-bold">Seamless Photobooth Experience</h3>
-                        
                         <div class="service-columns">
                             <div class="service-card">
                                 <strong class="roboto-bold">1. All-in-One Setup:</strong>
@@ -516,12 +602,10 @@
                                 Tamu bebas berekspresi dengan sesi foto tak terbatas dan durasi yang leluasa.
                             </div>
                         </div>
-
                     </div>
 
                     <div class="service-row">
                         <h3 class="roboto-bold">Personalized & Instant Keepsakes</h3>
-                        
                         <div class="service-columns">
                             <div class="service-card">
                                 <strong class="roboto-bold">1. Fully Customizable Design:</strong>
@@ -607,8 +691,10 @@
         </div>
     </footer>
 
-    <script>
+   <script>
         document.addEventListener('DOMContentLoaded', function() {
+            
+            // 1. Hero Background Carousel Logic
             const slides = document.querySelectorAll('.slide');
             let currentSlide = 0;
             const slideInterval = 3000;
@@ -618,6 +704,45 @@
                 currentSlide = (currentSlide + 1) % slides.length;
                 slides[currentSlide].classList.add('active');
             }, slideInterval);
+
+            // 2. Photobooth Body Slider Logic
+            const track = document.querySelector('.booth-track');
+            const slidesBody = document.querySelectorAll('.booth-slide');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+
+            function updateBoothSlider(index) {
+                // Scroll to the specific slide
+                track.scrollTo({
+                    left: slidesBody[index].offsetLeft,
+                    behavior: 'smooth'
+                });
+            }
+
+            // Click events for buttons
+            if (prevBtn && nextBtn) {
+                prevBtn.addEventListener('click', () => updateBoothSlider(0));
+                nextBtn.addEventListener('click', () => updateBoothSlider(1));
+            }
+
+            // Click events for dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => updateBoothSlider(index));
+            });
+
+            // Update dots when swiping on mobile
+            if (track) {
+                track.addEventListener('scroll', () => {
+                    let scrollPosition = track.scrollLeft;
+                    let index = Math.round(scrollPosition / track.offsetWidth);
+                    
+                    dots.forEach(d => d.classList.remove('active'));
+                    if(dots[index]) {
+                        dots[index].classList.add('active');
+                    }
+                });
+            }
         });
     </script>
 
