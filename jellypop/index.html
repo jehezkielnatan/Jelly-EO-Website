@@ -45,7 +45,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative; /* Added to keep header above slider */
+            position: relative;
             z-index: 10;
         }
 
@@ -82,7 +82,6 @@
             overflow: hidden;
         }
 
-        /* The Slider Container */
         .hero-slider {
             position: absolute;
             top: 0;
@@ -92,7 +91,6 @@
             z-index: 1;
         }
 
-        /* Individual Slides */
         .slide {
             position: absolute;
             top: 0;
@@ -102,14 +100,13 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out; /* Smooth fade effect */
+            transition: opacity 1.5s ease-in-out;
         }
 
         .slide.active {
             opacity: 1;
         }
 
-        /* Dark overlay so the white text stays readable over photos */
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -120,7 +117,6 @@
             z-index: 2;
         }
 
-        /* Keeps text on top of the background */
         .hero-content {
             position: relative;
             z-index: 3;
@@ -141,7 +137,10 @@
             line-height: 1.5;
         }
 
+        /* Updated Hero Button as a Link */
         .hero-btn {
+            display: inline-block;
+            text-decoration: none;
             background: transparent;
             border: 2px solid var(--light-text);
             color: var(--light-text);
@@ -151,6 +150,7 @@
             cursor: pointer;
             backdrop-filter: blur(5px);
             transition: 0.3s ease;
+            border-radius: 5px;
         }
 
         .hero-btn:hover {
@@ -399,7 +399,7 @@
         </nav>
     </header>
 
-    <section class="hero">
+    <section class="hero" id="about">
         
         <div class="hero-slider">
             <div class="slide active" style="background-image: url('<insert image here>');"></div>
@@ -413,7 +413,8 @@
         <div class="hero-content">
             <h1 class="impact-title">YOUR FRIENDLY<br>PHOTOBOOTH</h1>
             <p>Jellypop was created so no moment goes uncaptured. In a world that moves fast, we believe memories deserve more than just a place in your camera roll — they should be printed, shared, and remembered. That's why we built a photo booth that's fast, fun, and easy to use. Jellypop exists to help people become #MemoryMakers.</p>
-            <button class="hero-btn roboto-bold">BOOK NOW</button>
+            
+            <a href="https://wa.me/6285121306628?text=Hi%20Jellypop,%20I'd%20like%20to%20book%20a%20photobooth!" class="hero-btn roboto-bold" target="_blank">BOOK NOW</a>
         </div>
     </section>
 
@@ -515,16 +516,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             const slides = document.querySelectorAll('.slide');
             let currentSlide = 0;
-            const slideInterval = 4000; // Change image every 4 seconds (4000 milliseconds)
+            const slideInterval = 4000; // Change image every 4 seconds
 
             setInterval(function() {
-                // Remove 'active' class from current slide to fade it out
                 slides[currentSlide].classList.remove('active');
-                
-                // Move to the next slide, loop back to 0 if at the end
                 currentSlide = (currentSlide + 1) % slides.length;
-                
-                // Add 'active' class to the new slide to fade it in
                 slides[currentSlide].classList.add('active');
             }, slideInterval);
         });
