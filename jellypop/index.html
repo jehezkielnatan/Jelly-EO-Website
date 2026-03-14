@@ -6,7 +6,7 @@
     <title>Jellypop Photobooth</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         /* Base Colors & Typography */
@@ -17,7 +17,9 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            /* All standard text uses Roboto Regular */
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
             margin: 0;
             padding: 0;
             background-color: #ffffff;
@@ -25,10 +27,17 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, .logo-text {
-            font-family: 'Bebas Neue', cursive;
+        /* Specific Font Classes based on your instructions */
+        .impact-title {
+            font-family: 'Impact LT Std Bold', Impact, sans-serif;
             letter-spacing: 1px;
             margin: 0;
+            text-transform: uppercase;
+        }
+
+        .roboto-bold {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
         }
 
         /* Header */
@@ -40,10 +49,10 @@
             align-items: center;
         }
 
-        .header-logo {
-            color: var(--light-text);
-            font-size: 3rem;
-            line-height: 1;
+        .header-logo-img {
+            height: 40px; /* Adjust this value to make your header logo bigger/smaller */
+            width: auto;
+            display: block;
         }
 
         nav ul {
@@ -57,7 +66,6 @@
         nav a {
             color: var(--light-text);
             text-decoration: none;
-            font-weight: 600;
             font-size: 1.1rem;
         }
 
@@ -70,7 +78,6 @@
             padding: 120px 20px;
             text-align: center;
             color: var(--light-text);
-            /* Adds a slight dark overlay to make text readable */
             box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.4); 
         }
 
@@ -86,16 +93,14 @@
             margin: 0 auto 30px auto;
             font-size: 1.1rem;
             line-height: 1.5;
-            font-weight: 600;
         }
 
         .hero-btn {
             background: transparent;
             border: 2px solid var(--light-text);
             color: var(--light-text);
-            padding: 10px 40px;
+            padding: 12px 40px;
             font-size: 1.2rem;
-            font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
             backdrop-filter: blur(5px);
@@ -141,10 +146,8 @@
 
         .service-row h3 {
             text-align: center;
-            font-family: 'Inter', sans-serif;
             font-size: 1.3rem;
             margin-bottom: 20px;
-            font-weight: 600;
         }
 
         .service-columns {
@@ -155,8 +158,8 @@
 
         .service-item {
             flex: 1;
-            font-size: 0.9rem;
-            line-height: 1.4;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         /* Flanking Photobooth Images */
@@ -178,7 +181,6 @@
 
         /* Testimonials Section */
         .testimonials {
-            /* Creates the half-white, half-red background effect */
             background: linear-gradient(to bottom, #ffffff 40%, var(--primary-red) 40%);
             padding: 60px 50px;
             text-align: center;
@@ -186,7 +188,7 @@
 
         .testimonials h2 {
             font-size: 4rem;
-            color: var(--primary-red);
+            color: var(--primary-red); /* Set TESTIMONI text to red */
             margin-bottom: 40px;
         }
 
@@ -216,7 +218,6 @@
             position: relative;
         }
 
-        /* Little red square accent */
         .testi-content::before {
             content: '';
             position: absolute;
@@ -228,14 +229,13 @@
         }
 
         .testi-content p {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             line-height: 1.5;
             margin-bottom: 15px;
         }
 
         .testi-name {
-            font-weight: 800;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
         }
 
@@ -277,17 +277,16 @@
             align-items: center;
         }
 
-        .footer-logo {
-            font-size: 8rem;
-            color: var(--dark-text);
-            line-height: 0.8;
+        .footer-logo-img {
+            height: 70px; /* Adjust this value to make your footer logo bigger/smaller */
+            width: auto;
+            display: block;
         }
 
         .footer-contact {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            font-weight: 800;
             font-size: 1.1rem;
         }
 
@@ -300,17 +299,76 @@
         .contact-icon {
             width: 35px;
             height: 35px;
-            background-color: #333; /* Placeholder for icon background */
+            background-color: #333; 
             border-radius: 5px;
+        }
+
+        /* =========================================
+           MOBILE RESPONSIVENESS (Media Queries)
+           ========================================= */
+        @media (max-width: 900px) {
+            .services-box { width: 90%; }
+            .booth-img { display: none; } /* Hides the overlapping booths on smaller screens to prevent breaking the layout */
+            .testi-card { width: 45%; }
+            .testi-grid { flex-wrap: wrap; }
+        }
+
+        @media (max-width: 768px) {
+            /* Header Mobile */
+            header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+            nav ul { gap: 20px; }
+
+            /* Hero Mobile */
+            .hero { padding: 80px 20px; }
+            .hero h1 { font-size: 3.5rem; }
+
+            /* Services Mobile */
+            .services-section { padding: 40px 10px; }
+            .services-box {
+                width: 100%;
+                padding: 30px 20px;
+            }
+            .services-box h2 { font-size: 3rem; }
+            .service-columns {
+                flex-direction: column; /* Stacks the 3 service points vertically */
+                gap: 25px;
+            }
+
+            /* Testimonials Mobile */
+            .testimonials { padding: 40px 20px; }
+            .testimonials h2 { font-size: 3rem; }
+            .testi-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            .testi-card { width: 100%; max-width: 400px; }
+
+            /* Clients Mobile */
+            .clients { padding: 40px 20px; }
+            .clients h2 { font-size: 3rem; }
+            .client-logos img { max-height: 45px; max-width: 110px; }
+
+            /* Footer Mobile */
+            footer {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+                padding: 40px 20px;
+            }
+            .contact-item { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo-text header-logo">JELLYPOP.</div>
+        <img src="<insert image here>" alt="Jellypop Logo Header" class="header-logo-img">
         <nav>
-            <ul>
+            <ul class="roboto-bold">
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -319,9 +377,9 @@
     </header>
 
     <section class="hero">
-        <h1>YOUR FRIENDLY<br>PHOTOBOOTH</h1>
+        <h1 class="impact-title">YOUR FRIENDLY<br>PHOTOBOOTH</h1>
         <p>Jellypop was created so no moment goes uncaptured. In a world that moves fast, we believe memories deserve more than just a place in your camera roll — they should be printed, shared, and remembered. That's why we built a photo booth that's fast, fun, and easy to use. Jellypop exists to help people become #MemoryMakers.</p>
-        <button class="hero-btn">BOOK NOW</button>
+        <button class="hero-btn roboto-bold">BOOK NOW</button>
     </section>
 
     <section id="services" class="services-section">
@@ -329,24 +387,24 @@
         <img src="<insert image here>" alt="Right Photobooth Render" class="booth-img booth-right">
 
         <div class="services-box">
-            <h2>OUR SERVICES</h2>
+            <h2 class="impact-title">OUR SERVICES</h2>
             
             <div class="services-grid">
                 <div class="service-row">
-                    <h3>Seamless Photobooth Experience</h3>
+                    <h3 class="roboto-bold">Seamless Photobooth Experience</h3>
                     <div class="service-columns">
-                        <div class="service-item"><strong>1.</strong> All-in-One Setup: Solusi lengkap mulai dari kamera profesional, lighting hingga backdrop yang estetis</div>
-                        <div class="service-item"><strong>2.</strong> Autopilot System & Expert Crew: Didukung teknologi canggih dan kru yang ramah (helpful) untuk memastikan kelancaran sesi foto</div>
-                        <div class="service-item"><strong>3.</strong> Unlimited Sessions: Tamu bebas berekspresi dengan sesi foto tak terbatas dan durasi yang leluasa</div>
+                        <div class="service-item"><strong class="roboto-bold">1.</strong> All-in-One Setup: Solusi lengkap mulai dari kamera profesional, lighting hingga backdrop yang estetis</div>
+                        <div class="service-item"><strong class="roboto-bold">2.</strong> Autopilot System & Expert Crew: Didukung teknologi canggih dan kru yang ramah (helpful) untuk memastikan kelancaran sesi foto</div>
+                        <div class="service-item"><strong class="roboto-bold">3.</strong> Unlimited Sessions: Tamu bebas berekspresi dengan sesi foto tak terbatas dan durasi yang leluasa</div>
                     </div>
                 </div>
 
                 <div class="service-row">
-                    <h3>Personalized & Instant Keepsakes</h3>
+                    <h3 class="roboto-bold">Personalized & Instant Keepsakes</h3>
                     <div class="service-columns">
-                        <div class="service-item"><strong>1.</strong> Fully Customizable Design: Kebebasan kustomisasi frame sesuai identitas acara</div>
-                        <div class="service-item"><strong>2.</strong> Instant Hybrid Output: Dapatkan hasil cetak fisik secara instan serta akses digital (softcopy) cepat melalui QR Code.</div>
-                        <div class="service-item"><strong>3.</strong> Engaging Props & Accessories: Berbagai pilihan aksesori unik untuk menambah keseruan dan kreativitas setiap jepretan.</div>
+                        <div class="service-item"><strong class="roboto-bold">1.</strong> Fully Customizable Design: Kebebasan kustomisasi frame sesuai identitas acara</div>
+                        <div class="service-item"><strong class="roboto-bold">2.</strong> Instant Hybrid Output: Dapatkan hasil cetak fisik secara instan serta akses digital (softcopy) cepat melalui QR Code.</div>
+                        <div class="service-item"><strong class="roboto-bold">3.</strong> Engaging Props & Accessories: Berbagai pilihan aksesori unik untuk menambah keseruan dan kreativitas setiap jepretan.</div>
                     </div>
                 </div>
             </div>
@@ -354,14 +412,14 @@
     </section>
 
     <section class="testimonials">
-        <h2>TESTIMONI</h2>
+        <h2 class="impact-title">TESTIMONI</h2>
         <div class="testi-grid">
             
             <div class="testi-card">
                 <img src="<insert image here>" alt="Testimonial 1" class="testi-img">
                 <div class="testi-content">
                     <p>Koordinasi sangat responsif dan informatif, ditambah kualitas cetak luar biasa dengan pilihan template yang variatif. Kru yang sangat friendly memberikan pengalaman sempurna 1000/100 untuk acara kami!</p>
-                    <div class="testi-name">Ananta & Ghazali</div>
+                    <div class="testi-name roboto-bold">Ananta & Ghazali</div>
                 </div>
             </div>
 
@@ -369,7 +427,7 @@
                 <img src="<insert image here>" alt="Testimonial 2" class="testi-img">
                 <div class="testi-content">
                     <p>Pelayanan super friendly dan tim yang sangat membantu membuat pengalaman kerja sama jadi luar biasa menyenangkan. Terima kasih banyak!</p>
-                    <div class="testi-name">Fathun & Haikel</div>
+                    <div class="testi-name roboto-bold">Fathun & Haikel</div>
                 </div>
             </div>
 
@@ -377,7 +435,7 @@
                 <img src="<insert image here>" alt="Testimonial 3" class="testi-img">
                 <div class="testi-content">
                     <p>Pelayanan yang ramah, pilihan aksesori yang beragam, serta hasil foto yang berkualitas menjadikan JellyPop sebagai rekomendasi vendor photo booth terpercaya di wilayah Jabodetabek dan Bandung</p>
-                    <div class="testi-name">Allya (Axel Education)</div>
+                    <div class="testi-name roboto-bold">Allya (Axel Education)</div>
                 </div>
             </div>
 
@@ -385,7 +443,7 @@
     </section>
 
     <section class="clients">
-        <h2>OUR CLIENTS</h2>
+        <h2 class="impact-title">OUR CLIENTS</h2>
         <div class="client-logos">
             <img src="<insert image here>" alt="Mutual Major Logo">
             <img src="<insert image here>" alt="The Trans Luxury Hotel Logo">
@@ -400,9 +458,9 @@
     </section>
 
     <footer id="contact">
-        <div class="logo-text footer-logo">JELLYPOP.</div>
+        <img src="<insert image here>" alt="Jellypop Logo Footer" class="footer-logo-img">
         
-        <div class="footer-contact">
+        <div class="footer-contact roboto-bold">
             <div class="contact-item">
                 <img src="<insert image here>" alt="IG Icon" class="contact-icon">
                 <span>JELLYPOP.IG</span>
