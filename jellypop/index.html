@@ -29,6 +29,7 @@
             --dark-text: #1a1a1a;
             --light-text: #ffffff;
             --muted-text: #555555;
+            --strike-red: #e74c3c;
         }
 
         body {
@@ -254,14 +255,15 @@
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            align-items: flex-start;
+            align-items: flex-start; /* Crucial for sticky to work */
             gap: 60px;
         }
 
+        /* Left Side: Title and Intro Text */
         .services-left-sticky {
             flex: 1;
             position: sticky;
-            top: 150px;
+            top: 150px; /* Locks it to the screen */
             color: var(--light-text);
         }
 
@@ -278,6 +280,7 @@
             margin: 0;
         }
 
+        /* Right Side: Stacking Cards */
         .stack-container {
             flex: 1.2;
             display: flex;
@@ -298,6 +301,7 @@
             transition: transform 0.3s ease;
         }
 
+        /* Creates the staggered folder effect */
         .stack-card:nth-child(1) { top: 120px; z-index: 1; }
         .stack-card:nth-child(2) { top: 140px; z-index: 2; }
         .stack-card:nth-child(3) { top: 160px; z-index: 3; }
@@ -357,7 +361,7 @@
             border-radius: 20px;
             padding: 40px 30px;
             flex: 1;
-            min-width: 300px;
+            min-width: 320px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -374,15 +378,15 @@
 
         .package-img {
             width: 100%;
-            height: 220px;
+            height: auto;
+            aspect-ratio: 8 / 6; /* Updated for your perfect 800x600 size */
             object-fit: cover;
             border-radius: 15px;
             margin-bottom: 25px;
-            background-color: #eeeeee; /* Fallback color if image is missing */
         }
 
         .package-card h3 {
-            font-size: 3rem;
+            font-size: 2.2rem;
             color: var(--dark-text);
             margin: 0;
             line-height: 1;
@@ -390,39 +394,69 @@
 
         .package-subtitle {
             color: var(--primary-red);
-            font-size: 1.2rem;
-            margin-top: 10px;
+            font-size: 1.1rem;
+            margin-top: 5px;
             margin-bottom: 30px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .package-features {
+        /* Styling for the pricing list to make it look clean */
+        .pricing-list {
             list-style: none;
             padding: 0;
             margin: 0;
-            text-align: left;
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .package-features li {
-            padding: 15px 0;
+        .pricing-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            text-align: left;
+            padding-bottom: 10px;
             border-bottom: 1px solid #eeeeee;
+        }
+
+        .item-duration {
+            font-size: 1.3rem;
+            color: var(--dark-text);
+            line-height: 1.1;
+        }
+
+        .duration-subtitle {
+            font-size: 0.95rem;
             color: var(--muted-text);
-            font-size: 1.05rem;
+            font-weight: 400;
         }
 
-        .package-features li:last-child {
-            border-bottom: none;
+        .item-price {
+            font-size: 1.4rem;
+            color: var(--dark-text);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
         }
 
-        .package-features li strong {
+        .price-discounted {
             color: var(--dark-text);
         }
 
+        .price-original {
+            font-size: 0.9rem;
+            color: var(--strike-red);
+            text-decoration: line-through;
+            opacity: 0.8;
+            margin-bottom: 2px;
+        }
+
+        /* Universal Book Now button for the card */
         .package-btn {
             display: block;
-            margin-top: 25px;
+            margin-top: 35px;
             padding: 15px 30px;
             background-color: var(--primary-red);
             color: var(--light-text);
@@ -463,17 +497,7 @@
             letter-spacing: 1px;
         }
 
-        .featured-card .package-btn {
-            background-color: var(--dark-text);
-        }
-
-        .featured-card .package-btn:hover {
-            background-color: var(--primary-red);
-        }
-
-        /* =========================================
-           TESTIMONIALS & CLIENTS
-           ========================================= */
+        /* Testimonials */
         .testimonials {
             background: linear-gradient(to bottom, #ffffff 40%, #fafafa 40%);
             padding: 80px 50px;
@@ -527,9 +551,7 @@
         }
         .client-logos img { max-height: 60px; max-width: 150px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.9; }
 
-        /* =========================================
-           FOOTER
-           ========================================= */
+        /* Footer */
         footer {
             background-color: #ffffff; padding: 40px 50px;
             display: flex; justify-content: space-between; align-items: center;
@@ -543,9 +565,7 @@
         .contact-item:hover { opacity: 0.6; }
         .contact-icon { width: 35px; height: 35px; object-fit: contain; border-radius: 5px; }
 
-        /* =========================================
-           MOBILE RESPONSIVENESS
-           ========================================= */
+        /* Mobile Responsiveness */
         @media (max-width: 900px) {
             .testi-card { width: 45%; }
             .testi-grid { flex-wrap: wrap; }
@@ -565,14 +585,31 @@
 
             /* Sticky Stack Services Mobile */
             .services-section { padding: 80px 20px 100px 20px; }
-            .services-split-wrapper { flex-direction: column; gap: 40px; }
-            .services-left-sticky { position: relative; top: 0; text-align: center; }
+            
+            .services-split-wrapper {
+                flex-direction: column; 
+                gap: 40px;
+            }
+
+            .services-left-sticky {
+                position: relative; /* Turns off sticky for mobile so it scrolls naturally */
+                top: 0;
+                text-align: center;
+            }
+
             .services-left-sticky h2 { font-size: 3.5rem; }
             .services-left-sticky p { font-size: 1.1rem; }
+            
             .stack-container { gap: 25px; width: 100%; }
-            .stack-card { padding: 30px 25px; min-height: 180px; border-radius: 15px; }
+            .stack-card { 
+                padding: 30px 25px; 
+                min-height: 180px; 
+                border-radius: 15px; 
+            }
             .stack-card h3 { font-size: 1.5rem; }
             .stack-card p { font-size: 1rem; }
+            
+            /* Mobile Sticky Tops */
             .stack-card:nth-child(1) { top: 80px; }
             .stack-card:nth-child(2) { top: 95px; }
             .stack-card:nth-child(3) { top: 110px; }
@@ -587,6 +624,10 @@
             .package-card { width: 100%; max-width: 400px; padding: 40px 30px; }
             .featured-card { transform: none; }
             .featured-card:hover { transform: translateY(-5px); }
+            
+            .pricing-list { gap: 15px; }
+            .item-duration { font-size: 1.1rem; }
+            .item-price { font-size: 1.2rem; }
 
             .testimonials { padding: 40px 20px; }
             .testimonials h2 { font-size: 3rem; }
@@ -609,7 +650,7 @@
             <ul class="roboto-bold">
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#packages">Packages</a></li>
+                <li><a href="#packages">Pricing</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -617,10 +658,10 @@
 
     <section class="hero" id="about">
         <div class="hero-slider">
-            <div class="slide active" style="background-image: url('Header Photo Background.jpg');"></div>
-            <div class="slide" style="background-image: url('Hero Photo Background 2.png');"></div>
-            <div class="slide" style="background-image: url('Hero Photo Background 3.png');"></div>
-            <div class="slide" style="background-image: url('Hero Photo Background 4.jpg');"></div>
+            <div class="slide active" style="background-image: url('POP-Collage-Image-02.png');"></div>
+            <div class="slide" style="background-image: url('POP-Collage-Image-03.png');"></div>
+            <div class="slide" style="background-image: url('POP-Collage-Image-04.png');"></div>
+            <div class="slide" style="background-image: url('POP-Collage-Image-05.png');"></div>
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -652,10 +693,12 @@
 
     <section id="services" class="services-section">
         <div class="services-split-wrapper">
+            
             <div class="services-left-sticky">
                 <h2 class="impact-title">OUR SERVICES</h2>
                 <p>We bring more than just a camera. Jellypop offers a complete, premium photobooth experience designed to make your event truly unforgettable.</p>
             </div>
+            
             <div class="stack-container">
                 <div class="stack-card">
                     <h3 class="roboto-bold">All-in-One Setup</h3>
@@ -682,57 +725,111 @@
                     <p>Berbagai pilihan aksesori unik untuk menambah keseruan dan kreativitas setiap jepretan.</p>
                 </div>
             </div>
+
         </div>
     </section>
 
     <section id="packages" class="packages-section">
-        <h2 class="impact-title text-center">CHOOSE YOUR PACKAGE</h2>
-        <p class="text-center subtitle-text">Select the perfect print experience for your event.</p>
+        <h2 class="impact-title text-center">PRICING PACKAGES</h2>
+        <p class="text-center subtitle-text">Select the perfect print experience and duration for your event.</p>
         
         <div class="packages-grid">
             
             <div class="package-card">
-                <img src="Normal-Print.jpg" alt="Normal Unlimited Prints" class="package-img">
-                
+                <img src="pop-banner.jpg" alt="Unlimited Print - POP Packages" class="package-img">
                 <h3 class="impact-title">POP</h3>
-                <div class="package-subtitle roboto-bold">Unlimited Print</div>
-                <ul class="package-features">
-                    <li><strong>Unlimited</strong> Normal Prints</li>
-                    <li>Based on hourly rent</li>
-                    <li>Instant Digital QR Softcopy</li>
-                    <li>Standard Props & Custom Frame</li>
+                <div class="package-subtitle roboto-bold">Unlimited Normal Prints</div>
+                
+                <ul class="pricing-list roboto-bold">
+                    <li class="pricing-item">
+                        <div class="item-duration">2 JAM<div class="duration-subtitle">Unlimited Prints</div></div>
+                        <div class="item-price">
+                            <span class="price-original">Rp 2.300.000</span>
+                            <span class="price-discounted">Rp 1.700.000</span>
+                        </div>
+                    </li>
+                    <li class="pricing-item">
+                        <div class="item-duration">3 JAM<div class="duration-subtitle">Unlimited Prints</div></div>
+                        <div class="item-price">
+                            <span class="price-original">Rp 2.800.000</span>
+                            <span class="price-discounted">Rp 2.150.000</span>
+                        </div>
+                    </li>
+                    <li class="pricing-item">
+                        <div class="item-duration">4 JAM<div class="duration-subtitle">Unlimited Prints</div></div>
+                        <div class="item-price">
+                            <span class="price-original">Rp 3.400.000</span>
+                            <span class="price-discounted">Rp 2.600.000</span>
+                        </div>
+                    </li>
                 </ul>
-                <a href="https://wa.me/6285121306628?text=Hi%20Jellypop,%20I'd%20like%20to%20book%20the%20POP%20Unlimited%20Print%20package!" class="package-btn roboto-bold" target="_blank">Book Now</a>
+
+                <a href="https://wa.me/6285121306628?text=Hi%20Jellypop,%20I'd%20like%20to%20book%20a%20POP%20Unlimited%20Print%20package!" class="package-btn roboto-bold" target="_blank">Book Now</a>
             </div>
 
             <div class="package-card featured-card">
-                <div class="badge roboto-bold">MOST POPULAR</div>
-                
-                <img src="Holo-Print.gif" alt="Holographic Prints" class="package-img">
-                
+                <div class="badge roboto-bold">PREMIUM CHOICE</div>
+                <img src="holo-banner.jpg" alt="HOLOGRAPHIC Packages" class="package-img">
                 <h3 class="impact-title">HOLOGRAPHIC</h3>
-                <div class="package-subtitle roboto-bold">Unlimited Print</div>
-                <ul class="package-features">
-                    <li><strong>1 Holographic Print</strong> per session</li>
-                    <li><strong>Unlimited</strong> Normal Prints</li>
-                    <li>Based on hourly rent</li>
-                    <li>Instant Digital QR Softcopy</li>
+                <div class="package-subtitle roboto-bold">Holo + Unlimited Normal Prints</div>
+                
+                <ul class="pricing-list roboto-bold">
+                    <li class="pricing-item">
+                        <div class="item-duration">2 JAM<div class="duration-subtitle">+ Holographic Print (1/sess)</div></div>
+                        <div class="item-price">
+                            <span class="price-original">Rp 5.500.000</span>
+                            <span class="price-discounted">Rp 4.300.000</span>
+                        </div>
+                    </li>
+                    <li class="pricing-item">
+                        <div class="item-duration">3 JAM<div class="duration-subtitle">+ Holographic Print (1/sess)</div></div>
+                        <div class="item-price">
+                            <span class="price-original">Rp 6.600.000</span>
+                            <span class="price-discounted">Rp 5.200.000</span>
+                        </div>
+                    </li>
+                    <li class="pricing-item">
+                        <div class="item-duration">4 JAM<div class="duration-subtitle">+ Holographic Print (1/sess)</div></div>
+                        <div class="item-price">
+                            <span class="price-original">Rp 7.650.000</span>
+                            <span class="price-discounted">Rp 6.100.000</span>
+                        </div>
+                    </li>
                 </ul>
-                <a href="https://wa.me/6285121306628?text=Hi%20Jellypop,%20I'd%20like%20to%20book%20the%20HOLOGRAPHIC%20package!" class="package-btn roboto-bold" target="_blank">Book Now</a>
+
+                <a href="https://wa.me/6285121306628?text=Hi%20Jellypop,%20I'd%20like%20to%20book%20a%20HOLOGRAPHIC%20package!" class="package-btn roboto-bold" target="_blank">Book Now</a>
             </div>
 
             <div class="package-card">
-                <img src="Magnetic-Print.jpg" alt="Magnetic Prints" class="package-img">
-                
+                <img src="mag-banner.jpg" alt="MAGNETIC Packages" class="package-img">
                 <h3 class="impact-title">MAGNETIC</h3>
-                <div class="package-subtitle roboto-bold">Unlimited Print</div>
-                <ul class="package-features">
-                    <li><strong>1 Magnetic Print</strong> per session</li>
-                    <li><strong>Unlimited</strong> Normal Prints</li>
-                    <li>Based on hourly rent</li>
-                    <li>Instant Digital QR Softcopy</li>
+                <div class="package-subtitle roboto-bold">Magnetic + Unlimited Normal Prints</div>
+                
+                <ul class="pricing-list roboto-bold">
+                    <li class="pricing-item">
+                        <div class="item-duration">2 JAM<div class="duration-subtitle">+ Magnetic Print (1/sess)</div></div>
+                        <div class="item-price">
+                            <span class="price-original">Rp 3.700.000</span>
+                            <span class="price-discounted">Rp 2.700.000</span>
+                        </div>
+                    </li>
+                    <li class="pricing-item">
+                        <div class="item-duration">3 JAM<div class="duration-subtitle">+ Magnetic Print (1/sess)</div></div>
+                        <div class="item-price">
+                            <span class="price-original">Rp 4.400.000</span>
+                            <span class="price-discounted">Rp 3.150.000</span>
+                        </div>
+                    </li>
+                    <li class="pricing-item">
+                        <div class="item-duration">4 JAM<div class="duration-subtitle">+ Magnetic Print (1/sess)</div></div>
+                        <div class="item-price">
+                            <span class="price-original">Rp 5.000.000</span>
+                            <span class="price-discounted">Rp 3.600.000</span>
+                        </div>
+                    </li>
                 </ul>
-                <a href="https://wa.me/6285121306628?text=Hi%20Jellypop,%20I'd%20like%20to%20book%20the%20MAGNETIC%20package!" class="package-btn roboto-bold" target="_blank">Book Now</a>
+
+                <a href="https://wa.me/6285121306628?text=Hi%20Jellypop,%20I'd%20like%20to%20book%20a%20MAGNETIC%20package!" class="package-btn roboto-bold" target="_blank">Book Now</a>
             </div>
 
         </div>
