@@ -292,6 +292,7 @@
             display: flex;
             flex-direction: column;
             gap: 40px; 
+            padding-bottom: 300px; /* NEW: Invisible runway so the last card sticks! */
         }
 
         .stack-card {
@@ -606,7 +607,8 @@
             .services-left-sticky h2 { font-size: 3.5rem; }
             .services-left-sticky p { font-size: 1.1rem; }
             
-            .stack-container { gap: 25px; width: 100%; }
+            /* NEW: Invisible runway padding for mobile so the last card sticks! */
+            .stack-container { gap: 25px; width: 100%; padding-bottom: 250px; }
             .stack-card { 
                 padding: 30px 25px; 
                 min-height: 180px; 
