@@ -23,6 +23,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
+        /* CSS Reset for Safari width and padding issues */
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
         /* Base Colors & Typography */
         :root {
             --primary-red: #b31217;
@@ -39,7 +49,6 @@
             padding: 0;
             background-color: #ffffff;
             color: var(--dark-text);
-            overflow-x: hidden;
         }
 
         .impact-title {
@@ -379,7 +388,7 @@
         .package-img {
             width: 100%;
             height: auto;
-            aspect-ratio: 8 / 6; /* Updated for your perfect 800x600 size */
+            aspect-ratio: 8 / 6; /* 800x600 size */
             object-fit: cover;
             border-radius: 15px;
             margin-bottom: 25px;
@@ -573,7 +582,7 @@
 
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 20px; padding: 20px; }
-            nav ul { gap: 20px; }
+            nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
             .hero { padding: 80px 20px; min-height: 60vh; }
             .hero h1 { font-size: 3.5rem; }
             
@@ -621,7 +630,7 @@
             .packages-section { padding: 60px 20px; }
             .packages-section h2.impact-title { font-size: 3rem; }
             .packages-grid { flex-direction: column; align-items: center; gap: 40px; }
-            .package-card { width: 100%; max-width: 400px; padding: 40px 30px; }
+            .package-card { width: 100%; min-width: 0; max-width: 400px; padding: 40px 20px; }
             .featured-card { transform: none; }
             .featured-card:hover { transform: translateY(-5px); }
             
@@ -658,10 +667,10 @@
 
     <section class="hero" id="about">
         <div class="hero-slider">
-            <div class="slide active" style="background-image: url('POP-Collage-Image-02.png');"></div>
-            <div class="slide" style="background-image: url('POP-Collage-Image-03.png');"></div>
-            <div class="slide" style="background-image: url('POP-Collage-Image-04.png');"></div>
-            <div class="slide" style="background-image: url('POP-Collage-Image-05.png');"></div>
+            <div class="slide active" style="background-image: url('Header Photo Background.jpg');"></div>
+            <div class="slide" style="background-image: url('Hero Photo Background 2.png');"></div>
+            <div class="slide" style="background-image: url('Hero Photo Background 3.png');"></div>
+            <div class="slide" style="background-image: url('Hero Photo Background 4.jpg');"></div>
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -775,21 +784,21 @@
                 
                 <ul class="pricing-list roboto-bold">
                     <li class="pricing-item">
-                        <div class="item-duration">2 JAM<div class="duration-subtitle">+ Holographic Print (One Per Session )</div></div>
+                        <div class="item-duration">2 JAM<div class="duration-subtitle">+ Holographic Print (1/sess)</div></div>
                         <div class="item-price">
                             <span class="price-original">Rp 5.500.000</span>
                             <span class="price-discounted">Rp 4.300.000</span>
                         </div>
                     </li>
                     <li class="pricing-item">
-                        <div class="item-duration">3 JAM<div class="duration-subtitle">+ Holographic Print (One Per Session )</div></div>
+                        <div class="item-duration">3 JAM<div class="duration-subtitle">+ Holographic Print (1/sess)</div></div>
                         <div class="item-price">
                             <span class="price-original">Rp 6.600.000</span>
                             <span class="price-discounted">Rp 5.200.000</span>
                         </div>
                     </li>
                     <li class="pricing-item">
-                        <div class="item-duration">4 JAM<div class="duration-subtitle">+ Holographic Print (One Per Session )</div></div>
+                        <div class="item-duration">4 JAM<div class="duration-subtitle">+ Holographic Print (1/sess)</div></div>
                         <div class="item-price">
                             <span class="price-original">Rp 7.650.000</span>
                             <span class="price-discounted">Rp 6.100.000</span>
@@ -807,21 +816,21 @@
                 
                 <ul class="pricing-list roboto-bold">
                     <li class="pricing-item">
-                        <div class="item-duration">2 JAM<div class="duration-subtitle">+ Magnetic Print (One Per Session )</div></div>
+                        <div class="item-duration">2 JAM<div class="duration-subtitle">+ Magnetic Print (1/sess)</div></div>
                         <div class="item-price">
                             <span class="price-original">Rp 3.700.000</span>
                             <span class="price-discounted">Rp 2.700.000</span>
                         </div>
                     </li>
                     <li class="pricing-item">
-                        <div class="item-duration">3 JAM<div class="duration-subtitle">+ Magnetic Print (One Per Session )</div></div>
+                        <div class="item-duration">3 JAM<div class="duration-subtitle">+ Magnetic Print (1/sess)</div></div>
                         <div class="item-price">
                             <span class="price-original">Rp 4.400.000</span>
                             <span class="price-discounted">Rp 3.150.000</span>
                         </div>
                     </li>
                     <li class="pricing-item">
-                        <div class="item-duration">4 JAM<div class="duration-subtitle">+ Magnetic Print (One Per Session )</div></div>
+                        <div class="item-duration">4 JAM<div class="duration-subtitle">+ Magnetic Print (1/sess)</div></div>
                         <div class="item-price">
                             <span class="price-original">Rp 5.000.000</span>
                             <span class="price-discounted">Rp 3.600.000</span>
