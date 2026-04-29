@@ -28,11 +28,6 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-
         /* Base Colors & Typography */
         :root {
             --primary-red: #b31217;
@@ -49,6 +44,8 @@
             padding: 0;
             background-color: #ffffff;
             color: var(--dark-text);
+            max-width: 100%;
+            overflow-x: hidden; /* Kept ONLY on body to preserve sticky stack */
         }
 
         .impact-title {
